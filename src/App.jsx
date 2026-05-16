@@ -12,17 +12,14 @@ function App() {
   return (
     <>
       <p>[DEBUG] Logged in as: {user?.email}</p>
-      <div className="loginCard">
-        <nav>
           <div className="pageCard">
               <button onClick={() => setPage(Pages.LOGIN)}>Login Page</button>
               <button onClick={() => setPage(Pages.SIGNUP)}>Signup Page</button>
+              <button onClick={() => setPage(Pages.HOME)}>Home Page</button>
           </div>
-        </nav>
         {page === Pages.LOGIN && <LoginPage setPage={setPage} auth={{ user, setUser }} />}
         {page === Pages.SIGNUP && <SignupPage setPage={setPage} auth={{ user, setUser }} />}
         {page === Pages.HOME && <HomePage setPage={setPage} auth={{ user, setUser }} />}
-      </div>
     </>
   )
 }

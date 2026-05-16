@@ -41,34 +41,41 @@ function LoginPage({ setPage, auth: {user, setUser} }) {
   }
 
   return (
-    <div className="loginInfoBox">
-      <img src="src/assets/images/swiprLogo.png" alt="Logo" className="Logo"></img>
-      <h2>Login to Start Swiping!</h2>
-      
-      <form onSubmit={handleLogin}>
-        <div className="emailAndPasswordBox">
-          <label htmlFor="email">Email:</label>
-          <input
+    <div className="loginCard">
+      <div className="pageCard">
+          <button onClick={() => setPage(Pages.LOGIN)}>Login Page</button>
+          <button onClick={() => setPage(Pages.SIGNUP)}>Signup Page</button>
+      </div>
+      <div className="loginInfoBox">
+        <img src="src/assets/images/swiprLogo.png" alt="Logo" className="Logo"></img>
+        <h2>Login to Start Swiping!</h2>
+        
+        <form onSubmit={handleLogin}>
+          <div className="emailAndPasswordBox">
+            <label htmlFor="email">Email:</label>
+            <input
+              className="credentialsBox"
+              id="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <label htmlFor="password">Password:</label>
+            <input
             className="credentialsBox"
-            id="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label htmlFor="password">Password:</label>
-          <input
-          className="credentialsBox"
-            id="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button className= "bigAhhButton" type="submit">Login</button>
-        </div>
+              id="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button className= "bigAhhButton" type="submit">Login</button>
+          </div>
 
-      </form>
+        </form>
 
-      {isLoading && <p>Loading...</p>}
-      <p>{error}</p>
+        {isLoading && <p>Loading...</p>}
+        <p>{error}</p>
 
-      <p>Don't have an account? <a onClick={() => setPage(Pages.SIGNUP)}>Create Account</a></p>
+        <p>Don't have an account? <a onClick={() => setPage(Pages.SIGNUP)}>Create Account</a></p>
+      </div>
     </div>
+
   )
 }
 

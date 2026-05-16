@@ -87,3 +87,16 @@ export async function validateVerificationCode(email, code) {
 
   return data
 }
+
+export async function sendResetCode(email) {
+    const res = await fetch(
+        `${BACKEND_API_URL}/auth/send-reset-code`,
+        {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: email })
+        }
+    );
+}

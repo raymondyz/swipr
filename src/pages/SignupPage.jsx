@@ -193,7 +193,7 @@ function SignupPage({ setPage, auth: {user, setUser} }) {
       {panel === Panels.REGISTRATION && <RegistrationPanel setPanel={setPanel} auth={{user, setUser}} />}
       {panel === Panels.EMAIL_VERIFICATION && <VerificationPanel setPage={setPage} auth={{user, setUser}} />}
 
-      <p>Already have an account? <a onClick={() => setPage(Pages.LOGIN)}>Login</a></p>
+      <p>Already have an account? <a onClick={() => setPage(Pages.LOGIN)} className="url">Login</a></p>
     </>
   )
 }

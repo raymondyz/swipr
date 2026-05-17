@@ -17,3 +17,5 @@ function ProfilePage({ setPage, auth: {user, setUser} }){
         </div>
     );
 }
+
+export default ProfilePage

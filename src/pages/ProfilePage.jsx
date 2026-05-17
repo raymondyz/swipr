@@ -42,7 +42,7 @@ function ProfilePage({ setPage, auth: {user, setUser} }){
 
     return (
         <>
-            {/* This is the start of the profile page section */}
+        <div className="homePageContent">
             <h4>Location Preferences:</h4>
             <div className="diningHallList">
                 <div className="diningHallRating">
@@ -151,7 +151,8 @@ function ProfilePage({ setPage, auth: {user, setUser} }){
                 <p>{"Bio: " + bio}</p>
                 <p>{"Swipe Status: " + swipeStatus}</p>
             </div>
-            {/* This is the end of the profile page section */}
+        </div>
+
         </>
     );
 }

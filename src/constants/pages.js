@@ -2,5 +2,6 @@ export const Pages = Object.freeze({
   HOME: "home",
   LOGIN: "login",
   SIGNUP: "signup",
-  DINING: "dining"
+  DINING: "dining",
+  PROFILE: "profile"
 });

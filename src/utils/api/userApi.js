@@ -42,3 +42,43 @@ export async function getAllUserProfiles() {
 
   return data;
 }
+
+export async function getProfile(userId) {
+
+  const res = await fetch(
+    `${BACKEND_API_URL}/profile/get`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: userId })
+    }
+  );
+
+  const data = await res.json()
+
+  if (!res.ok) {
+    throw new Error(data.error)
+  }
+
+  return data;
+}
+
+export async function updateProfile(userId, updates) {
+
+  const res = await fetch(
+    `${BACKEND_API_URL}/profile/update`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId, updates })
+    }
+  );
+
+  const data = await res.json()
+
+  if (!res.ok) {
+    throw new Error(data.error)
+  }
+
+  return data;
+}

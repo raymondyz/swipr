@@ -22,16 +22,15 @@ export async function getUserByEmail(email) {
   return data;
 }
 
-export async function getAllUsers() {
+export async function getAllUserProfiles() {
 
   const res = await fetch(
-    `${BACKEND_API_URL}/getAllUsers`,
+    `${BACKEND_API_URL}/user/getAllUserProfiles`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ query: "all" })
+      }
     }
   );
 

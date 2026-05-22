@@ -120,7 +120,7 @@ function ProfilePage({ setPage, auth: {user, setUser} }){
                 <StarRating rating={locationPref.bruinbowl}
                     onRate={(val) => setLocationPref({...locationPref, bruinbowl: val})
                 } />
-                <h3>Rating: {locationPref.brinbowl}/5</h3>
+                <h3>Rating: {locationPref.bruinbowl}/5</h3>
                 </div>
             </div>
             <h4>Update Time Availability:</h4>

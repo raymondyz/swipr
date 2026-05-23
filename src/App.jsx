@@ -1,10 +1,10 @@
 import { useState } from "react"
 import "./App.css"
+import { Pages } from "./constants/pages"
 import LoginPage from "./pages/LoginPage"
 import HomePage from "./pages/HomePage"
-import { Pages } from "./constants/pages"
 import SignupPage from "./pages/SignupPage"
-import SearchPage from "./pages/SearchPage"
+
 
 function App() {
   const [user, setUser] = useState(null)
@@ -23,7 +23,6 @@ function App() {
       {page === Pages.LOGIN && <LoginPage setPage={setPage} auth={{ user, setUser }} />}
       {page === Pages.SIGNUP && <SignupPage setPage={setPage} auth={{ user, setUser }} />}
       {page === Pages.HOME && <HomePage setPage={setPage} auth={{ user, setUser }} />}
-      {page === Pages.SEARCH && <SearchPage setPage={setPage} auth={{ user, setUser }} />}
     </>
   )
 }

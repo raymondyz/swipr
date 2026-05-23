@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Pages } from "../constants/pages"
 import { validateLogin } from "../utils/api/authApi"
 import { getUserByEmail } from "../utils/api/userApi"
 
@@ -52,7 +51,7 @@ function TimeTable({ availability, updateAvailability }) {
     );
 }
 
-function ProfilePage({ setPage, auth: {user, setUser} }){
+function ProfilePanel({ setPanel, auth: {user, setUser} }){
 
     function updateAvailability(row, col) {
         setTimePref(prev =>
@@ -219,4 +218,4 @@ function ProfilePage({ setPage, auth: {user, setUser} }){
     );
 }
 
-export default ProfilePage
+export default ProfilePanel

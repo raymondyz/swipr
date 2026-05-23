@@ -1,16 +1,11 @@
 import { useState, useEffect } from "react";
-import { Pages } from "../constants/pages";
 import { getAllUserProfiles } from "../utils/api/userApi";
 
 import ProfileCard from "../components/ProfileCard";
 
-function SearchPage({ setPage, auth: {user, setUser} }) {
+function SearchPanel({ setPanel, auth: {user, setUser} }) {
   const [profiles, setProfiles] = useState(null)
 
-  useEffect(() => {
-    if (!user) setPage(Pages.LOGIN);
-  }, [user]);
-  
   useEffect(() => {
     async function fetchProfiles() {
       const response = await getAllUserProfiles();
@@ -39,4 +34,4 @@ function SearchPage({ setPage, auth: {user, setUser} }) {
 
 }
 
-export default SearchPage
+export default SearchPanel

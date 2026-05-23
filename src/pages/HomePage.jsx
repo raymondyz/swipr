@@ -1,15 +1,21 @@
 import { useState, useEffect } from "react"
-import { Pages } from "../constants/pages"
+import { Pages, Panels } from "../constants/pages"
 import { validateLogin } from "../utils/api/authApi"
 import { getAllUserProfiles } from "../utils/api/userApi"
 
-import ProfilePage from "./ProfilePage"
+import ProfilePanel from "./ProfilePanel"
+import SearchPanel from "./SearchPanel"
 
 function HomePage({ setPage, auth: {user, setUser}  }) {
   const [name, setName] = useState("")
-  const [page2, setPage2] = useState(Pages.HOME);
+  const [panel, setPanel] = useState(Panels.HOME);
 
   const [data, setData] = useState(null);
+
+  // Send user to login if not logged in
+  useEffect(() => {
+    if (!user) setPage(Pages.LOGIN);
+  }, [user]);
 
   useEffect(() => {
     async function fetchProfiles() {
@@ -33,15 +39,16 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
           <img src="src/assets/images/swiprLogo.png" alt="Logo" className="Logo"></img>
           <img src="src/assets/images/animepfp.jpg" alt="PFP" className="PFP"></img>
           <p>[DEBUG] Logged in as: {user?.email}</p>
-          <button onClick={() => setPage2(Pages.PROFILE)} className= "bigAhhButton" type="submit">Profile</button>
-          <button onClick={() => setPage2(Pages.HOME)} className= "bigAhhButton" type="submit">Settings</button>
+          <button onClick={() => setPanel(Panels.PROFILE)} className= "bigAhhButton" type="submit">Profile</button>
+          <button onClick={() => setPanel(Panels.SETTINGS)} className= "bigAhhButton" type="submit">Settings</button>
+          <button onClick={() => setPanel(Panels.SEARCH)} className= "bigAhhButton" type="submit">Search</button>
           
-          <button onClick={() => setPage2(Pages.HOME)} className= "bigAhhButton" type="submit">Home</button>
-          <button onClick={() => setPage2(Pages.HOME)} className= "bigAhhButton" type="submit">Dining Halls</button>
-          <button onClick={() => setPage2(Pages.HOME)} className= "bigAhhButton" type="submit">Groups</button>
-          <button onClick={() => setPage2(Pages.HOME)} className= "bigAhhButton" type="submit">Messages</button>
+          <button onClick={() => setPanel(Panels.HOME)} className= "bigAhhButton" type="submit">Home</button>
+          <button onClick={() => setPanel(Panels.HOME)} className= "bigAhhButton" type="submit">Dining Halls</button>
+          <button onClick={() => setPanel(Panels.HOME)} className= "bigAhhButton" type="submit">Groups</button>
+          <button onClick={() => setPanel(Panels.HOME)} className= "bigAhhButton" type="submit">Messages</button>
         </div>
-        {page2 === Pages.HOME && <div className="homePageContent">
+        {panel === Panels.HOME && <div className="homePageContent">
             <h2>Welcome {user.name}!</h2> 
             {data ? (
                 <>
@@ -53,7 +60,8 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
                 <p>Loading profiles...</p>
             )}
         </div>}
-        {page2 === Pages.PROFILE && <ProfilePage setPage={setPage2} auth={{ user, setUser }} />}
+        {panel === Panels.PROFILE && <ProfilePanel setPanel={setPanel} auth={{ user, setUser }} />}
+        {panel === Panels.SEARCH && <SearchPanel setPanel={setPanel} auth={{ user, setUser }} />}
         
         
       </div>

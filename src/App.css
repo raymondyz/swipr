@@ -3,9 +3,47 @@ body{
     margin: 0;
 }
 
-.homePage{
-    color: black;
+#root {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
 }
+
+.homePage{
+    height: 100%;
+    color: black;
+    background-color: violet;
+}
+
+.masterHomePage{
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+
+.home-panel {
+    width: 100%;
+    overflow: scroll;
+}
+
+.sideNavBar{
+    background-color: grey;
+    width: 250px;
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
 
 .diningHallList{
     display: flex;
@@ -95,17 +133,6 @@ button{
     width: 90px;
 }
 
-.sideNavBar{
-    position:fixed;
-    background-color: grey;
-    width: 250px;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-}
-
 .TimeRow{
     display: flex;
     flex-direction: row;
@@ -124,11 +151,6 @@ button{
     height: 100vh;
     display: flex;
     flex-direction: column;
-}
-
-.masterHomePage{
-    display: flex;
-    flex-direction: row;
 }
 
 .debugMenu{

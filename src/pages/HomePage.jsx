@@ -48,22 +48,22 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
           <button onClick={() => setPanel(Panels.HOME)} className= "bigAhhButton" type="submit">Groups</button>
           <button onClick={() => setPanel(Panels.HOME)} className= "bigAhhButton" type="submit">Messages</button>
         </div>
-        {panel === Panels.HOME && <div className="homePageContent">
-            <h2>Welcome {user.name}!</h2> 
-            {data ? (
-                <>
-                    <p>Loaded {data.length} profiles!</p>
-                    <p>{JSON.stringify(data)}</p>
-                </>
-                
-            ) : (
-                <p>Loading profiles...</p>
-            )}
-        </div>}
-        {panel === Panels.PROFILE && <ProfilePanel setPanel={setPanel} auth={{ user, setUser }} />}
-        {panel === Panels.SEARCH && <SearchPanel setPanel={setPanel} auth={{ user, setUser }} />}
-        
-        
+        <div className="home-panel">
+          {panel === Panels.HOME && <div className="homePageContent">
+              <h2>Welcome {user.name}!</h2> 
+              {data ? (
+                  <>
+                      <p>Loaded {data.length} profiles!</p>
+                      <p>{JSON.stringify(data)}</p>
+                  </>
+                  
+              ) : (
+                  <p>Loading profiles...</p>
+              )}
+          </div>}
+          {panel === Panels.PROFILE && <ProfilePanel setPanel={setPanel} auth={{ user, setUser }} />}
+          {panel === Panels.SEARCH && <SearchPanel setPanel={setPanel} auth={{ user, setUser }} />}
+        </div>
       </div>
     </div>
   )

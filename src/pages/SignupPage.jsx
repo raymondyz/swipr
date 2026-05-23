@@ -14,7 +14,7 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
   const [name, setName] = useState("")
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState(false);
+  const [password, setPassword] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState(true);
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -101,7 +101,7 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
             <input
               className="credentialsBox"
               id="password"
-              type={password ? "text":"password"}
+              type={password ? "password":"text"}
               onChange={(e) => setPassword(e.target.value)}
             />
              <button className="bigAhhButton" type="button" onClick={eyeToggle}>eye</button>
@@ -109,6 +109,7 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
             <input
               className="credentialsBox"
               id="confirm-password"
+               type={password ? "password":"text"}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <button className="bigAhhButton" type="submit">Signup</button>

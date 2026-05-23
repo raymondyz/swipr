@@ -135,7 +135,8 @@ button{
 
 .TimeGrid {
     display: grid;
-    grid-template-columns: 100px repeat(18, 70px);
+    grid-template-columns: 100px repeat(7, 70px);
+    grid-auto-rows: 30px;
     align-items: center;
 }
 

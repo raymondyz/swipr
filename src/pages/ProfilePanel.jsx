@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect, Fragment } from "react"
 import { validateLogin } from "../utils/api/authApi"
-import { getUserByEmail } from "../utils/api/userApi"
+import { getUserByEmail, getProfile, updateProfile } from "../utils/api/userApi"
 
 function StarRating({ rating, onRate }){
   return (
@@ -34,43 +34,82 @@ function TimeTable({ availability, updateAvailability }) {
 
     return (
         <div className="TimeGrid">
-            {/* Empty top-left corner */}
             <div></div>
-            {timeList.map(day => (
+            {dotw.map(day => (
                 <div className="HeaderCell" key={day}>
                     {day}
                 </div>
             ))}
 
-            {availability.map((row, rowIndex) => (
-                <>
-                    {/* Time label */}
-                    <div className="TimeLabel" key={dotw[rowIndex]}>
-                        {dotw[rowIndex]}
+            {timeList.map((time, timeIndex) => (
+                <Fragment key={time}>
+                    <div className="TimeLabel">
+                        {time}
                     </div>
 
-                    {/* Availability cells */}
-                    {row.map((available, colIndex) => (
+                    {dotw.map((day, dayIndex) => (
                         <div
-                            key={`${rowIndex}-${colIndex}`}
+                            key={`${dayIndex}-${timeIndex}`}
                             onClick={() =>
-                                updateAvailability(rowIndex, colIndex)
+                                updateAvailability(dayIndex, timeIndex)
                             }
                             className="TimeCell"
                             style={{
-                                backgroundColor: available
+                                backgroundColor: availability[dayIndex][timeIndex]
                                     ? "#adeeb0"
                                     : "#efa49e"
                             }}
                         />
                     ))}
-                </>
+                </Fragment>
             ))}
         </div>
     );
 }
 
 function ProfilePanel({ setPanel, auth: {user, setUser} }){
+    const [isLoading, setIsLoading] = useState(true);
+    const [locationPref, setLocationPref] = useState({
+        bcafe: 0,
+        bplate: 0,
+        cafe1919: 0,
+        deneve: 0,
+        epicuria: 0,
+        feast: 0,
+        thedrey: 0,
+        thestudy: 0,
+        foodtrucks: 0,
+        rendevous: 0,
+        bruinbowl: 0
+    });
+    const [timePref, setTimePref] = useState([
+        //6am   7am    8am   9am   10am  11am 12pm  1pm  2pm    3pm  4pm    5pm   6pm   7pm    8pm   9pm  10pm  11pm
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Sunday
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false] //Saturday
+    ]);
+    const [notes, setNotes] = useState("");
+    const [swipeStatus, setSwipeStatus] = useState("kore wa sutatosu desu");
+
+    // Fetch user's current profile
+    useEffect(() => {
+        async function fetchProfile() {            
+            const response = await getProfile(user.id);
+            if (response) {
+                setNotes(response.notes)
+                setSwipeStatus(response.swipe_availability)
+                setIsLoading(false)
+            } else {
+                console.error("Failed to load profile", response.error);
+            }
+        }
+        fetchProfile();
+    }, []);
+    
 
     function updateAvailability(row, col) {
         setTimePref(prev =>
@@ -83,51 +122,16 @@ function ProfilePanel({ setPanel, auth: {user, setUser} }){
         );
     }
 
-  const [locationPref, setLocationPref] = useState({
-    bcafe: 0,
-    bplate: 0,
-    cafe1919: 0,
-    deneve: 0,
-    epicuria: 0,
-    feast: 0,
-    thedrey: 0,
-    thestudy: 0,
-    foodtrucks: 0,
-    rendevous: 0,
-    bruinbowl: 0
-  });
-  const [timePref, setTimePref] = useState([
-    //6am   7am    8am   9am   10am  11am 12pm  1pm  2pm    3pm  4pm    5pm   6pm   7pm    8pm   9pm  10pm  11pm
-    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Sunday
-    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
-    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
-    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
-    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
-    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
-    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false] //Saturday
-    //Su    Mo    Tu    We    Th    Fr    Sa
-    // [false,false,false,false,false,false,false], //6am - 6:59am
-    // [false,false,false,false,false,false,false], //7am
-    // [false,false,false,false,false,false,false], //8am
-    // [false,false,false,false,false,false,false], //9am
-    // [false,false,false,false,false,false,false], //10am
-    // [false,false,false,false,false,false,false], //11am
-    // [false,false,false,false,false,false,false], //12pm
-    // [false,false,false,false,false,false,false], //1pm
-    // [false,false,false,false,false,false,false], //2pm
-    // [false,false,false,false,false,false,false], //3pm
-    // [false,false,false,false,false,false,false], //4pm
-    // [false,false,false,false,false,false,false], //5pm
-    // [false,false,false,false,false,false,false], //6pm
-    // [false,false,false,false,false,false,false], //7pm
-    // [false,false,false,false,false,false,false], //8pm
-    // [false,false,false,false,false,false,false], //9pm
-    // [false,false,false,false,false,false,false], //10pm
-    // [false,false,false,false,false,false,false], //11pm - 11:59am
-    ]);
-  const [bio, setBio] = useState("this is the bio");
-  const [swipeStatus, setSwipeStatus] = useState("kore wa sutatosu desu");
+    function handleSave() {
+        updateProfile(user.id, {
+            swipe_availability: swipeStatus,
+            notes: notes
+        })
+    }
 
+    if (isLoading) {
+        return <p>Loading...</p>
+    }
 
     return (
         <>
@@ -219,26 +223,33 @@ function ProfilePanel({ setPanel, auth: {user, setUser} }){
             />
             <div>
             </div>
-            <h4>Update Bio:</h4>
+            <label for="notes"><h4>Update Notes:</h4></label>
             <input
                 className="credentialsBox"
-                id="name"
-                onChange={(e) => setBio(e.target.value)}
+                id="notes"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
             />
             <div>
             </div>
-            <h4>Swipe Status:</h4>
-            <input
+            <label for="swipe-status"><h4>Swipe Status:</h4></label>
+            <select 
                 className="credentialsBox"
-                id="name"
+                id="swipe-status"
+                value={swipeStatus} 
                 onChange={(e) => setSwipeStatus(e.target.value)}
-            />
+            >
+                <option value="offer_swipes">I can swipe others</option>
+                <option value="self_swipes">I can only swipe myself</option>
+                <option value="need_swipes">I need swipes</option>
+            </select>
             <div>
                 <p>{"Location Preferences: " + JSON.stringify(locationPref)}</p>
                 <p>{"Time preferences: " + JSON.stringify(timePref)}</p>
-                <p>{"Bio: " + bio}</p>
+                <p>{"Notes: " + notes}</p>
                 <p>{"Swipe Status: " + swipeStatus}</p>
             </div>
+            <button onClick={handleSave}>Save</button>
         </div>
 
         </>

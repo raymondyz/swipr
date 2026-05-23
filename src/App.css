@@ -105,7 +105,7 @@ button{
     align-items: center;
     justify-content: center;
     color: white;
-    padding: 8px;
+    padding: 0px;
     border-radius: 5px;
 }
 
@@ -156,4 +156,12 @@ button{
 .debugMenu{
     color: rgb(60, 2, 96);
     background-color: rgb(185, 233, 185);
+}
+
+.buttonHidden{
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
 }

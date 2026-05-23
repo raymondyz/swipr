@@ -8,7 +8,10 @@ function LoginPage({ setPage, auth: {user, setUser} }) {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false)
-
+  const eyeToggle = () => {
+    console.log("eye toggled");
+    setPassword(!password);
+  }
   async function handleLogin(e) {
     e.preventDefault()
     setError("")
@@ -62,8 +65,10 @@ function LoginPage({ setPage, auth: {user, setUser} }) {
             <input
             className="credentialsBox"
               id="password"
+              type = {password ? "password":"text"}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <button class="buttonHidden" type="button" onClick={eyeToggle} style={{outline:'none'}} ><img src="src/assets/images/eye.png" style={{width:'20px',height:'20px'}}/></button>
             <button className= "bigAhhButton" type="submit">Login</button>
           </div>
 

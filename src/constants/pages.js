@@ -3,5 +3,6 @@ export const Pages = Object.freeze({
   LOGIN: "login",
   SIGNUP: "signup",
   DINING: "dining",
-  PROFILE: "profile"
+  PROFILE: "profile",
+  SEARCH: "search"
 });

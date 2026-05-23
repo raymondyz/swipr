@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Pages } from "../constants/pages";
 import { getAllUserProfiles } from "../utils/api/userApi";
 
+import ProfileCard from "../components/ProfileCard";
+
 function SearchPage({ setPage, auth: {user, setUser} }) {
   const [profiles, setProfiles] = useState(null)
 
@@ -21,20 +23,20 @@ function SearchPage({ setPage, auth: {user, setUser} }) {
     fetchProfiles();
   }, []);
 
-  return <>
-    <h1>HELLO</h1>
-    {profiles ?
-      <ul>
-        <>E</>
-        {profiles.map(profile => <p>{profile.users.name}</p>)}
-      </ul>
-    : 
-      <p>Loading...</p>
-    }
-  </>
+  return (
+    <>
+      {profiles ?
+        <ul>
+          {profiles.map(profile => (
+            <ProfileCard key={profile.user_id} profile={profile} />
+          ))}
+        </ul>
+      :
+        <p>Loading...</p>
+      }
+    </>
+  )
 
-
-  
 }
 
 export default SearchPage

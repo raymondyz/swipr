@@ -133,19 +133,30 @@ button{
     width: 90px;
 }
 
-.TimeRow{
-    display: flex;
-    flex-direction: row;
+.TimeGrid {
+    display: grid;
+    grid-template-columns: 100px repeat(18, 70px);
     align-items: center;
 }
 
-.TimeTable{
-    display: flex;
-    flex-direction: column;
+.HeaderCell {
+    font-weight: bold;
+    text-align: center;
+}
+
+.TimeLabel {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.TimeCell {
+    width: 70px;
+    height: 30px;
+    border: 1px solid black;
+    cursor: pointer;
 }
 
 .homePageContent{
-    margin-left: 250px;
     background-color: #eee;
     width: 100vh;
     height: 100vh;

@@ -21,31 +21,50 @@ function StarRating({ rating, onRate }){
 }
 
 function TimeTable({ availability, updateAvailability }) {
-    const timeList = ["6:00am", "7:00am", "8:00am", "9:00am", "10:00am", "11:00am", "12:00pm",
-        "1:00pm", "2:00pm", "3:00pm", "4:00pm", "5:00pm", "6:00pm", "7:00pm", "8:00pm",
-         "9:00pm", "10:00pm", "11:00pm"
-     ];
-     const dotw = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const timeList = [
+        "6:00am", "7:00am", "8:00am", "9:00am",
+        "10:00am", "11:00am", "12:00pm",
+        "1:00pm", "2:00pm", "3:00pm",
+        "4:00pm", "5:00pm", "6:00pm",
+        "7:00pm", "8:00pm", "9:00pm",
+        "10:00pm", "11:00pm"
+    ];
+
+    const dotw = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
     return (
         <div className="TimeGrid">
+            {/* Empty top-left corner */}
+            <div></div>
+            {timeList.map(day => (
+                <div className="HeaderCell" key={day}>
+                    {day}
+                </div>
+            ))}
+
             {availability.map((row, rowIndex) => (
-                <div className="TimeRow" key={rowIndex}>
+                <>
+                    {/* Time label */}
+                    <div className="TimeLabel" key={dotw[rowIndex]}>
+                        {dotw[rowIndex]}
+                    </div>
+
+                    {/* Availability cells */}
                     {row.map((available, colIndex) => (
                         <div
-                        
-                            key={colIndex}
-                            onClick={() => updateAvailability(rowIndex, colIndex)}
+                            key={`${rowIndex}-${colIndex}`}
+                            onClick={() =>
+                                updateAvailability(rowIndex, colIndex)
+                            }
+                            className="TimeCell"
                             style={{
-                                width: "40px",
-                                height: "30px",
-                                cursor: "pointer",
-                                fontSize: "50px",
-                                border: "1px solid black",
-                                backgroundColor: available ? "#adeeb0" : "#efa49e"
+                                backgroundColor: available
+                                    ? "#adeeb0"
+                                    : "#efa49e"
                             }}
                         />
                     ))}
-                </div>
+                </>
             ))}
         </div>
     );
@@ -78,25 +97,33 @@ function ProfilePanel({ setPanel, auth: {user, setUser} }){
     bruinbowl: 0
   });
   const [timePref, setTimePref] = useState([
+    //6am   7am    8am   9am   10am  11am 12pm  1pm  2pm    3pm  4pm    5pm   6pm   7pm    8pm   9pm  10pm  11pm
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Sunday
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false] //Saturday
     //Su    Mo    Tu    We    Th    Fr    Sa
-    [false,false,false,false,false,false,false], //6am - 6:59am
-    [false,false,false,false,false,false,false], //7am
-    [false,false,false,false,false,false,false], //8am
-    [false,false,false,false,false,false,false], //9am
-    [false,false,false,false,false,false,false], //10am
-    [false,false,false,false,false,false,false], //11am
-    [false,false,false,false,false,false,false], //12pm
-    [false,false,false,false,false,false,false], //1pm
-    [false,false,false,false,false,false,false], //2pm
-    [false,false,false,false,false,false,false], //3pm
-    [false,false,false,false,false,false,false], //4pm
-    [false,false,false,false,false,false,false], //5pm
-    [false,false,false,false,false,false,false], //6pm
-    [false,false,false,false,false,false,false], //7pm
-    [false,false,false,false,false,false,false], //8pm
-    [false,false,false,false,false,false,false], //9pm
-    [false,false,false,false,false,false,false], //10pm
-    [false,false,false,false,false,false,false], //11pm - 11:59am
+    // [false,false,false,false,false,false,false], //6am - 6:59am
+    // [false,false,false,false,false,false,false], //7am
+    // [false,false,false,false,false,false,false], //8am
+    // [false,false,false,false,false,false,false], //9am
+    // [false,false,false,false,false,false,false], //10am
+    // [false,false,false,false,false,false,false], //11am
+    // [false,false,false,false,false,false,false], //12pm
+    // [false,false,false,false,false,false,false], //1pm
+    // [false,false,false,false,false,false,false], //2pm
+    // [false,false,false,false,false,false,false], //3pm
+    // [false,false,false,false,false,false,false], //4pm
+    // [false,false,false,false,false,false,false], //5pm
+    // [false,false,false,false,false,false,false], //6pm
+    // [false,false,false,false,false,false,false], //7pm
+    // [false,false,false,false,false,false,false], //8pm
+    // [false,false,false,false,false,false,false], //9pm
+    // [false,false,false,false,false,false,false], //10pm
+    // [false,false,false,false,false,false,false], //11pm - 11:59am
     ]);
   const [bio, setBio] = useState("this is the bio");
   const [swipeStatus, setSwipeStatus] = useState("kore wa sutatosu desu");

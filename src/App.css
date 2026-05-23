@@ -106,6 +106,17 @@ button{
     align-items: center;
 }
 
+.TimeRow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.TimeTable{
+    display: flex;
+    flex-direction: column;
+}
+
 .homePageContent{
     margin-left: 250px;
     background-color: #eee;

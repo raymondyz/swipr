@@ -7,6 +7,7 @@ import { filterUsers } from "../utils/dataFilter"
 
 import ProfilePanel from "./ProfilePanel"
 import SearchPanel from "./SearchPanel"
+import DiningHallPanel from "./DiningHallPanel"
 
 function HomePage({ setPage, auth: {user, setUser}  }) {
   const [name, setName] = useState("")
@@ -97,6 +98,7 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
         </div>}
         {panel === Panels.PROFILE && <ProfilePanel setPanel={setPanel} auth={{ user, setUser }} />}
         {panel === Panels.SEARCH && <SearchPanel setPanel={setPanel} auth={{ user, setUser }} />}
+        {panel === Panels.DINING && <DiningHallPanel setPanel={setPanel} auth={{ user, setUser }} />}
         
         
       </div>

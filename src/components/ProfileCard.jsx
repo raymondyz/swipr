@@ -9,7 +9,7 @@ function ProfileCard({profile}) {
     <h2>{name}</h2>
     <p>{username}</p>
     <h3>Swipe: {swipe_availability}</h3>
-    {location_preferences && location_preferences.map(location => <p>{location}</p>)}
+    {location_preferences && Object.keys(location_preferences).map(location => <p>{location}</p>)}
   </div>
 }
 

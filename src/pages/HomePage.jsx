@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { Pages, Panels } from "../constants/pages"
 import { validateLogin } from "../utils/api/authApi"
 import { getAllUserProfiles } from "../utils/api/userApi"
-import { Avails } from "../constants/swipe_avail"
+import { Avails } from "../constants/filter_avail"
 import { filterUsers } from "../utils/dataFilter"
 
 import ProfilePanel from "./ProfilePanel"
@@ -15,9 +15,9 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
   const [data, setData] = useState(null); // "this is caching" - raymond
   const [dataRender, setDataRender] = useState(null);
 
-  const [filterSwipeAvailValue, setFilterSwipeAvailValue] = useState(null);
+  const [filterSwipeAvailValue, setFilterSwipeAvailValue] = useState("null");
   const [filterLocationValue, setFilterLocationValue] = useState(null);
-  const [filterTimeAvailValue, setFilterTimeAvailValue] = useState(null);
+  const [filterTimeAvailValue, setFilterTimeAvailValue] = useState("null");
 
   
 
@@ -42,7 +42,8 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
   }, []); // no dependencies --> run once. Reloads on browser refresh
 
     function reloadUsers() {
-        console.log(filterSwipeAvailValue);
+        // console.log(filterSwipeAvailValue);
+        // console.log(filterTimeAvailValue);
         setDataRender(filterUsers(data, filterSwipeAvailValue, filterLocationValue, filterTimeAvailValue));
     }
 
@@ -70,16 +71,24 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
             <h2>Welcome {user.name}!</h2> 
             {dataRender ? (
                 <>
-                    <select name="swipesAvail" value={filterSwipeAvailValue} onChange={e => setFilterSwipeAvailValue(e.target.value)}>
-                        <option value={"null"} >All swipe availabilities</option>
-                        <option value={Avails.OFFER_SWIPES} >Offering Swipes</option>
-                        <option value={Avails.SELF_SWIPES} >Swiping Themselves</option>
-                        <option value={Avails.NEED_SWIPES} >Needs Swipes</option>
-                    </select>
+                    <div style={{ alignItems: 'center' }}>
+                        <select name="swipesAvail" value={filterSwipeAvailValue} onChange={e => setFilterSwipeAvailValue(e.target.value)}>
+                            <option value={"null"} >All swipe availabilities</option>
+                            <option value={Avails.OFFER_SWIPES} >Offering Swipes</option>
+                            <option value={Avails.SELF_SWIPES} >Swiping Themselves</option>
+                            <option value={Avails.NEED_SWIPES} >Needs Swipes</option>
+                        </select>
+                        <select name="timeAvail" value={filterTimeAvailValue} onChange={e => setFilterTimeAvailValue(e.target.value)}>
+                            <option value={"null"} >All times</option>
+                            <option value={Avails.CURRENT_TIME} >Available right now (only in PST)</option>
+                            
+                        </select>
+                    </div>
+                    
                     
                     <button onClick={() => reloadUsers()}>Apply Filters</button>
                     <p>Loaded {dataRender.length} profiles!</p>
-                    <p>{JSON.stringify(dataRender)}</p>
+                    {dataRender.length > 0 ? <p>{JSON.stringify(dataRender)}</p> : <p>No profiles loaded!</p>}
                 </>
                 
             ) : (

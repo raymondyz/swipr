@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"
-import { Pages } from "../constants/pages"
+import { useState, useEffect, Fragment } from "react"
+import { Pages, Panels } from "../constants/pages"
 
 
 function LocationsPanel({setPanel, locations:{choices,setAmount}}) {
@@ -14,6 +14,12 @@ function LocationsPanel({setPanel, locations:{choices,setAmount}}) {
         {label: "7", value: "rendezvous"},
         {label: "8", value: "the study"}
     ]
+
+    const handleSubmit =(e)=>{
+        e.preventDefault();
+        console.log("This ran");
+    };
+
     async function handleLocations(e) {
         if (listoflocs.length === 0) {
             alert("yo you gotta select a location my user")
@@ -66,3 +72,5 @@ function LocationsPanel({setPanel, locations:{choices,setAmount}}) {
         </form>
     )
 }
+
+export default LocationsPanel

@@ -14,11 +14,14 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
   const [name, setName] = useState("")
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password, setPassword] = useState(true);
+  const [confirmPassword, setConfirmPassword] = useState(true);
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-
+  const eyeToggle = () => {
+    console.log("eye toggled");
+    setPassword(!password);
+  }
   async function handleSignup(e) {
     e.preventDefault()
     setError("")
@@ -93,18 +96,23 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
               id="email"
               onChange={(e) => setEmail(e.target.value)}
             />
+
             <label htmlFor="password">Password:</label>
             <input
               className="credentialsBox"
               id="password"
+              type={password ? "password":"text"}
               onChange={(e) => setPassword(e.target.value)}
             />
+             
             <label htmlFor="confirm-password">Confirm Password:</label>
             <input
               className="credentialsBox"
               id="confirm-password"
+               type={password ? "password":"text"}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
+            <button class="buttonHidden" type="button" onClick={eyeToggle} style={{outline:'none'}} ><img src="src/assets/images/eye.png" style={{width:'20px',height:'20px'}}/></button>
             <button className="bigAhhButton" type="submit">Signup</button>
           </div>
 

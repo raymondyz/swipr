@@ -31,9 +31,52 @@ function TimeTable({ availability, updateAvailability }) {
     ];
 
     const dotw = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const [isSelecting, setIsSelecting] = useState(false);
+    const [startCell, setStartCell] = useState(null);
+    const [dragOriginal, setDragOriginal] = useState(null);
+    const [dragToggleValue, setDragToggleValue] = useState(null);
+
+    const cloneAvailability = (avail) => avail.map(row => [...row]);
+
+    const handleMouseDown = (dayIndex, timeIndex, event) => {
+        event.preventDefault();
+        const original = cloneAvailability(availability);
+        const toggleValue = !availability[dayIndex][timeIndex];
+
+        setIsSelecting(true);
+        setStartCell({ dayIndex, timeIndex });
+        setDragOriginal(original);
+        setDragToggleValue(toggleValue);
+
+        updateAvailability(dayIndex, timeIndex, {
+            startCell: { dayIndex, timeIndex },
+            currentCell: { dayIndex, timeIndex },
+            original,
+            toggleValue
+        });
+    };
+
+    const handleMouseEnter = (dayIndex, timeIndex) => {
+        if (!isSelecting || !startCell || !dragOriginal) return;
+
+        updateAvailability(dayIndex, timeIndex, {
+            startCell,
+            currentCell: { dayIndex, timeIndex },
+            original: dragOriginal,
+            toggleValue: dragToggleValue
+        });
+    };
+
+    const handleMouseUp = () => {
+        if (!isSelecting) return;
+        setIsSelecting(false);
+        setStartCell(null);
+        setDragOriginal(null);
+        setDragToggleValue(null);
+    };
 
     return (
-        <div className="TimeGrid">
+        <div className="TimeGrid" onMouseLeave={handleMouseUp} onMouseUp={handleMouseUp}>
             <div></div>
             {dotw.map(day => (
                 <div className="HeaderCell" key={day}>
@@ -50,14 +93,19 @@ function TimeTable({ availability, updateAvailability }) {
                     {dotw.map((day, dayIndex) => (
                         <div
                             key={`${dayIndex}-${timeIndex}`}
-                            onClick={() =>
-                                updateAvailability(dayIndex, timeIndex)
-                            }
+                            onMouseDown={(event) => handleMouseDown(dayIndex, timeIndex, event)}
+                            onMouseEnter={() => handleMouseEnter(dayIndex, timeIndex)}
+                            onMouseUp={handleMouseUp}
                             className="TimeCell"
                             style={{
                                 backgroundColor: availability[dayIndex][timeIndex]
-                                    ? "#adeeb0"
-                                    : "#efa49e"
+                                    ? !isSelecting
+                                        ? "#adeeb0"
+                                        : "#8bd490"
+                                    : !isSelecting  
+                                        ? "#efa49e"
+                                        : "#e79690",
+                                userSelect: "none"
                             }}
                         />
                     ))}
@@ -93,8 +141,7 @@ function ProfilePanel({ setPanel, auth: {user, setUser} }){
         [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false] //Saturday
     ]);
     const [notes, setNotes] = useState("");
-    const [swipeStatus, setSwipeStatus] = useState("kore wa sutatosu desu");
-
+    const [swipeStatus, setSwipeStatus] = useState("");
     // Fetch user's current profile
     useEffect(() => {
         async function fetchProfile() {            
@@ -109,17 +156,29 @@ function ProfilePanel({ setPanel, auth: {user, setUser} }){
         }
         fetchProfile();
     }, []);
-    
 
-    function updateAvailability(row, col) {
-        setTimePref(prev =>
-            prev.map((r, rIndex) =>
-                rIndex === row
-                    ? r.map((val, valIndex) =>
-                        valIndex === col ? !val : val
-                    ) : r
-            )
-        );
+    function updateAvailability(row, col, range = null) {
+        setTimePref(prev => {
+            if (!range || !range.original) {
+                const newPref = prev.map(r => [...r]);
+                newPref[row][col] = !newPref[row][col];
+                return newPref;
+            }
+
+            const { startCell, currentCell, original, toggleValue } = range;
+            const minDay = Math.min(startCell.dayIndex, currentCell.dayIndex);
+            const maxDay = Math.max(startCell.dayIndex, currentCell.dayIndex);
+            const minTime = Math.min(startCell.timeIndex, currentCell.timeIndex);
+            const maxTime = Math.max(startCell.timeIndex, currentCell.timeIndex);
+
+            return original.map((rowArr, dIndex) =>
+                rowArr.map((cellValue, tIndex) =>
+                    dIndex >= minDay && dIndex <= maxDay && tIndex >= minTime && tIndex <= maxTime
+                        ? toggleValue
+                        : cellValue
+                )
+            );
+        });
     }
 
     function handleSave() {

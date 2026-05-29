@@ -66,7 +66,7 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
           <button onClick={() => setPanel(Panels.HOME)} className= "bigAhhButton" type="submit">Messages</button>
         </div>
         <div className="home-panel">
-        {panel === Pages.HOME && <div className="homePageContent">
+        {panel === Panels.HOME && <div className="homePageContent">
             <h2>Welcome {user.name}!</h2> 
             {dataRender ? (
                 <>
@@ -86,7 +86,7 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
                 <p>Loading profiles...</p>
             )}
         </div>}
-        {panel === Pages.PROFILE && <ProfilePage setPage={setPanel} auth={{ user, setUser }} />}
+        {panel === Panels.PROFILE && <ProfilePanel setPanel={setPanel} auth={{ user, setUser }} />}
         {panel === Panels.SEARCH && <SearchPanel setPanel={setPanel} auth={{ user, setUser }} />}
         
         

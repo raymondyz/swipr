@@ -83,7 +83,7 @@ function ProfilePanel({ setPanel, auth: {user, setUser} }){
         bruinbowl: 0
     });
     const [timePref, setTimePref] = useState([
-        //6am   7am    8am   9am   10am  11am 12pm  1pm  2pm    3pm  4pm    5pm   6pm   7pm    8pm   9pm  10pm  11pm
+        // 6am   7am   8am   9am  10am  11am  12pm   1pm   2pm   3pm   4pm   5pm   6pm   7pm   8pm   9pm  10pm  11pm
         [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Sunday
         [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
         [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
@@ -102,6 +102,8 @@ function ProfilePanel({ setPanel, auth: {user, setUser} }){
             if (response) {
                 setNotes(response.notes)
                 setSwipeStatus(response.swipe_availability)
+                setLocationPref(response.location_preferences)
+                setTimePref(response.availability)
                 setIsLoading(false)
             } else {
                 console.error("Failed to load profile", response.error);
@@ -125,7 +127,9 @@ function ProfilePanel({ setPanel, auth: {user, setUser} }){
     function handleSave() {
         updateProfile(user.id, {
             swipe_availability: swipeStatus,
-            notes: notes
+            notes: notes,
+            availability: timePref,
+            location_preferences: locationPref
         })
     }
 

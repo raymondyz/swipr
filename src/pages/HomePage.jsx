@@ -48,7 +48,7 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
     }
 
   if (!user){
-    return (<h2>You are not currently logged in yet... (also it should be impossible to get to this page lul)</h2>)
+    return (<h2>You are not currently logged in yet...</h2>)
   }
   return (
     <div className="homePage">
@@ -62,7 +62,7 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
           <button onClick={() => setPanel(Panels.SEARCH)} className= "bigAhhButton" type="submit">Search</button>
           
           <button onClick={() => setPanel(Panels.HOME)} className= "bigAhhButton" type="submit">Home</button>
-          <button onClick={() => setPanel(Panels.HOME)} className= "bigAhhButton" type="submit">Dining Halls</button>
+          <button onClick={() => setPanel(Panels.DINING)} className= "bigAhhButton" type="submit">Dining Halls</button>
           <button onClick={() => setPanel(Panels.HOME)} className= "bigAhhButton" type="submit">Groups</button>
           <button onClick={() => setPanel(Panels.HOME)} className= "bigAhhButton" type="submit">Messages</button>
         </div>

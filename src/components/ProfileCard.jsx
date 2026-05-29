@@ -4,6 +4,7 @@ function ProfileCard({profile}) {
   const swipe_availability = profile.swipe_availability
   const location_preferences = profile.location_preferences
   const notes = profile.notes
+  
 
   return <div style={{border: "1px solid black"}}>
     <h2>{name}</h2>

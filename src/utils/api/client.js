@@ -1,6 +1,11 @@
 const BACKEND_API_URL = import.meta.env.VITE_BACKEND_API_URL
 
+function getToken() {
+  return localStorage.getItem("token");
+}
+
 export async function request(path, body) {
+  const token = getToken();
   let res
   let data
 
@@ -8,7 +13,10 @@ export async function request(path, body) {
 
     const options = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
     }
     if (body !== undefined) {
       options.body = JSON.stringify(body)

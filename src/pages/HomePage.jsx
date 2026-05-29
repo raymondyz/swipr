@@ -68,16 +68,7 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
                         <option value={Avails.SELF_SWIPES} >Swiping Themselves</option>
                         <option value={Avails.NEED_SWIPES} >Needs Swipes</option>
                     </select>
-                    <select name="Location">
-                        <option value={Avails.OFFER_SWIPES} >Offering Swipes</option>
-                        <option value={Avails.SELF_SWIPES} >Swiping Themselves</option>
-                        <option value={Avails.NEED_SWIPES} >Needs Swipes</option>
-                    </select>
-                    <select name="swipesAvail">
-                        <option value={Avails.OFFER_SWIPES} >Offering Swipes</option>
-                        <option value={Avails.SELF_SWIPES} >Swiping Themselves</option>
-                        <option value={Avails.NEED_SWIPES} >Needs Swipes</option>
-                    </select>
+                    
                     <button onClick={() => reloadUsers()}>Apply Filters</button>
                     <p>Loaded {dataRender.length} profiles!</p>
                     <p>{JSON.stringify(dataRender)}</p>

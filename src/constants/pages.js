@@ -9,5 +9,6 @@ export const Panels = Object.freeze({
   DINING: "dining",
   PROFILE: "profile",
   SEARCH: "search",
-  SETTINGS: "settings"
+  SETTINGS: "settings",
+  MESSAGE: "message",
 });

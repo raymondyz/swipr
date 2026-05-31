@@ -14,9 +14,6 @@ function App() {
   const [page, setPage] = useState(Pages.LOGIN)
   const [isLoading, setIsLoading] = useState(true)
 
-  const pages = Object.keys(Pages)
-
-
   // Auto login from local storage
   useEffect(() => {
     async function checkAuth() {
@@ -41,18 +38,14 @@ function App() {
     checkAuth();
   }, []);
 
+  // Loading screen
   if (isLoading) {
     return <h1>Loading, please wait...</h1>
   }
 
+  // Render page
   return (
     <>
-    <div className="debugMenu">
-      <p>[DEBUG] Logged in as: {user?.email}</p>
-      <div className="pageCard">
-        {pages.map(page => <button key={Pages[page]} onClick={() => setPage(Pages[page])}>{Pages[page]}</button>)}
-      </div>
-    </div>
       {page === Pages.LOGIN && <LoginPage setPage={setPage} auth={{ user, setUser }} />}
       {page === Pages.SIGNUP && <SignupPage setPage={setPage} auth={{ user, setUser }} />}
       {page === Pages.HOME && <HomePage setPage={setPage} auth={{ user, setUser }} />}

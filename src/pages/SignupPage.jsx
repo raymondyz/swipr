@@ -9,7 +9,6 @@ const Panels = Object.freeze({
   EMAIL_VERIFICATION: "EMAIL_verification",
 });
 
-
 function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
   const [name, setName] = useState("")
   const [username, setUsername] = useState("")
@@ -18,10 +17,12 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
   const [confirmPassword, setConfirmPassword] = useState(true);
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+
   const eyeToggle = () => {
     console.log("eye toggled");
     setPassword(!password);
   }
+
   async function handleSignup(e) {
     e.preventDefault()
     setError("")
@@ -74,54 +75,62 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
     }
   }
 
-  return (
-    <>   
-        <form onSubmit={handleSignup}>
-          <div className="emailAndPasswordBox">
-            <label htmlFor="name">Name:</label>
-            <input
-              className="credentialsBox"
-              id="name"
-              onChange={(e) => setName(e.target.value)}
-            />
-            <label htmlFor="username">Username:</label>
-            <input
-              className="credentialsBox"
-              id="username"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <label htmlFor="email">Email:</label>
-            <input
-              className="credentialsBox"
-              id="email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
+  return (<>   
+    <form onSubmit={handleSignup}>
+      <div className="emailAndPasswordBox">
+        <label htmlFor="name">Name:</label>
+        <input
+          className="credentialsBox"
+          id="name"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <label htmlFor="username">Username:</label>
+        <input
+          className="credentialsBox"
+          id="username"
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <label htmlFor="email">Email:</label>
+        <input
+          className="credentialsBox"
+          id="email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-            <label htmlFor="password">Password:</label>
-            <input
-              className="credentialsBox"
-              id="password"
-              type={password ? "password":"text"}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-             
-            <label htmlFor="confirm-password">Confirm Password:</label>
-            <input
-              className="credentialsBox"
-              id="confirm-password"
-               type={password ? "password":"text"}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <button className="buttonHidden" type="button" onClick={eyeToggle} style={{outline:'none'}} ><img src="src/assets/images/eye.png" style={{width:'20px',height:'20px'}}/></button>
-            <button className="bigAhhButton" type="submit">Signup</button>
-          </div>
+        <label htmlFor="password">Password:</label>
+        <input
+          className="credentialsBox"
+          id="password"
+          type={password ? "password":"text"}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+          
+        <label htmlFor="confirm-password">Confirm Password:</label>
+        <input
+          className="credentialsBox"
+          id="confirm-password"
+            type={password ? "password":"text"}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+        <button
+          className="buttonHidden"
+          type="button"
+          onClick={eyeToggle}
+          style={{outline:'none'}}
+        >
+          <img
+            src="src/assets/images/eye.png"
+            style={{width:'20px',height:'20px'}}
+          />
+        </button>
+        <button className="bigAhhButton" type="submit">Signup</button>
+      </div>
 
-          </form>
+    </form>
 
-        {isLoading && <p>Loading...</p>}
-        <p>{error}</p>
-    </>
-  )
+    {isLoading && <p>Loading...</p>}
+    <p>{error}</p>
+  </>)
 }
 
 function VerificationPanel({ setPage, auth: {user, setUser} }) {

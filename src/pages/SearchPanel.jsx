@@ -26,46 +26,48 @@ function SearchPanel({ setPanel, auth: {user, setUser} }) {
     fetchProfiles();
   }, []);
 
-    function reloadUsers() {
-        // console.log(filterSwipeAvailValue);
-        // console.log(filterTimeAvailValue);
-        setProfilesFiltered(filterUsers(profiles, filterSwipeAvailValue, filterLocationValue, filterTimeAvailValue));
-    }
+  function reloadUsers() {
+    setProfilesFiltered(filterUsers(profiles, filterSwipeAvailValue, filterLocationValue, filterTimeAvailValue));
+  }
 
-  return (
-    <>
-        
-        {profilesFiltered ?
-            <>
-                <>
-                    <div style={{ alignItems: 'center' }}>
-                        <select name="swipesAvail" value={filterSwipeAvailValue} onChange={e => setFilterSwipeAvailValue(e.target.value)}>
-                            <option value={"null"} >All swipe availabilities</option>
-                            <option value={Avails.OFFER_SWIPES} >Offering Swipes</option>
-                            <option value={Avails.SELF_SWIPES} >Swiping Themselves</option>
-                            <option value={Avails.NEED_SWIPES} >Needs Swipes</option>
-                        </select>
-                        <select name="timeAvail" value={filterTimeAvailValue} onChange={e => setFilterTimeAvailValue(e.target.value)}>
-                            <option value={"null"} >All times</option>
-                            <option value={Avails.CURRENT_TIME} >Available right now (only in PST)</option>
-                            
-                        </select>
-                    </div>
-                    
-                    
-                    <button onClick={() => reloadUsers()}>Apply Filters</button>
-                    <p>Loaded {profilesFiltered.length} profiles!</p>
-                    {profilesFiltered.length > 0 ? profilesFiltered.map(profile => (
-                        <ProfileCard key={profile.user_id} profile={profile} />
-                    )) : <p>No profiles loaded!</p>}
-                </>
-                
-            </>
-        :
-            <p>Loading...</p>
-        }
-    </>
-  )
+  // Loading screen
+  if (!profilesFiltered) {
+    return <p>Loading...</p>
+  }
+
+  return (<>
+    <div style={{ alignItems: 'center' }}>
+      <select
+        name="swipesAvail"
+        value={filterSwipeAvailValue}
+        onChange={e => setFilterSwipeAvailValue(e.target.value)}
+      >
+        <option value={"null"} >All swipe availabilities</option>
+        <option value={Avails.OFFER_SWIPES} >Offering Swipes</option>
+        <option value={Avails.SELF_SWIPES} >Swiping Themselves</option>
+        <option value={Avails.NEED_SWIPES} >Needs Swipes</option>
+      </select>
+      <select
+        name="timeAvail"
+        value={filterTimeAvailValue}
+        onChange={e => setFilterTimeAvailValue(e.target.value)}
+      >
+        <option value={"null"} >All times</option>
+        <option value={Avails.CURRENT_TIME} >Available right now (only in PST)</option>
+      </select>
+    </div>
+    
+    <button onClick={ reloadUsers }>Apply Filters</button>
+    <p>Loaded {profilesFiltered.length} profiles!</p>
+
+    {profilesFiltered.length > 0 ?
+      profilesFiltered.map(
+        profile => <ProfileCard key={profile.user_id} profile={profile} />
+      )
+    : 
+      <p>No profiles loaded!</p>
+    }
+  </>)
 
 }
 

@@ -2,6 +2,31 @@ import { useState, useEffect, Fragment } from "react"
 import { validateLogin } from "../utils/api/authApi"
 import { getUserByEmail, getProfile, updateProfile } from "../utils/api/userApi"
 
+const locationPrefDefault = Object.freeze({
+    bcafe: 0,
+    bplate: 0,
+    cafe1919: 0,
+    deneve: 0,
+    epicuria: 0,
+    feast: 0,
+    thedrey: 0,
+    thestudy: 0,
+    foodtrucks: 0,
+    rendevous: 0,
+    bruinbowl: 0
+})
+
+const timePrefDefault = Object.freeze([
+    // 6am   7am   8am   9am  10am  11am  12pm   1pm   2pm   3pm   4pm   5pm   6pm   7pm   8pm   9pm  10pm  11pm
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], // Sunday
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], // Saturday
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], // Saturday
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], // Saturday
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], // Saturday
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], // Saturday
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]  // Saturday
+])
+
 function StarRating({ rating, onRate }){
   return (
     <div>
@@ -117,31 +142,11 @@ function TimeTable({ availability, updateAvailability }) {
 
 function ProfilePanel({ setPanel, auth: {user, setUser} }){
     const [isLoading, setIsLoading] = useState(true);
-    const [locationPref, setLocationPref] = useState({
-        bcafe: 0,
-        bplate: 0,
-        cafe1919: 0,
-        deneve: 0,
-        epicuria: 0,
-        feast: 0,
-        thedrey: 0,
-        thestudy: 0,
-        foodtrucks: 0,
-        rendevous: 0,
-        bruinbowl: 0
-    });
-    const [timePref, setTimePref] = useState([
-        // 6am   7am   8am   9am  10am  11am  12pm   1pm   2pm   3pm   4pm   5pm   6pm   7pm   8pm   9pm  10pm  11pm
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Sunday
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], //Saturday
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false] //Saturday
-    ]);
+    const [locationPref, setLocationPref] = useState(locationPrefDefault);
+    const [timePref, setTimePref] = useState(timePrefDefault);
     const [notes, setNotes] = useState("");
     const [swipeStatus, setSwipeStatus] = useState("");
+
     // Fetch user's current profile
     useEffect(() => {
         async function fetchProfile() {            
@@ -192,6 +197,7 @@ function ProfilePanel({ setPanel, auth: {user, setUser} }){
         })
     }
 
+    // Loading screen
     if (isLoading) {
         return <p>Loading...</p>
     }

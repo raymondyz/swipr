@@ -8,10 +8,12 @@ function LoginPage({ setPage, auth: {user, setUser} }) {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false)
+
   const eyeToggle = () => {
     console.log("eye toggled");
     setPassword(!password);
   }
+
   async function handleLogin(e) {
     e.preventDefault()
     setError("")
@@ -22,6 +24,7 @@ function LoginPage({ setPage, auth: {user, setUser} }) {
       await validateLogin(email, password)
       
       // Login successful
+
       const fetchedUser = await getUserByEmail(email)
       setUser(fetchedUser)
 
@@ -32,10 +35,8 @@ function LoginPage({ setPage, auth: {user, setUser} }) {
       else {
         setPage(Pages.SIGNUP)
       }
-      console.log("Login successful")
     }
     catch (err) {
-      console.log("Login failed")
       setError(err.message)
     }
     finally {
@@ -46,8 +47,8 @@ function LoginPage({ setPage, auth: {user, setUser} }) {
   return (
     <div className="loginCard">
       <div className="pageCard">
-          <button onClick={() => setPage(Pages.LOGIN)}>Login Page</button>
-          <button onClick={() => setPage(Pages.SIGNUP)}>Signup Page</button>
+        <button onClick={() => setPage(Pages.LOGIN)}>Login Page</button>
+        <button onClick={() => setPage(Pages.SIGNUP)}>Signup Page</button>
       </div>
       <div className="loginInfoBox">
         <img src="src/assets/images/swiprLogo.png" alt="Logo" className="Logo"></img>
@@ -68,7 +69,17 @@ function LoginPage({ setPage, auth: {user, setUser} }) {
               type = {password ? "password":"text"}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button className="buttonHidden" type="button" onClick={eyeToggle} style={{outline:'none'}} ><img src="src/assets/images/eye.png" style={{width:'20px',height:'20px'}}/></button>
+            <button
+              className="buttonHidden"
+              type="button"
+              onClick={eyeToggle}
+              style={{outline:'none'}}
+            >
+              <img
+                src="src/assets/images/eye.png"
+                style={{width:'20px',height:'20px'}}
+              />
+            </button>
             <button className= "bigAhhButton" type="submit">Login</button>
           </div>
 
@@ -80,7 +91,6 @@ function LoginPage({ setPage, auth: {user, setUser} }) {
         <p>Don't have an account? <a onClick={() => setPage(Pages.SIGNUP)}>Create Account</a></p>
       </div>
     </div>
-
   )
 }
 

@@ -112,7 +112,7 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
                type={password ? "password":"text"}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <button class="buttonHidden" type="button" onClick={eyeToggle} style={{outline:'none'}} ><img src="src/assets/images/eye.png" style={{width:'20px',height:'20px'}}/></button>
+            <button className="buttonHidden" type="button" onClick={eyeToggle} style={{outline:'none'}} ><img src="src/assets/images/eye.png" style={{width:'20px',height:'20px'}}/></button>
             <button className="bigAhhButton" type="submit">Signup</button>
           </div>
 

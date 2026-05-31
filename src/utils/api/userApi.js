@@ -1,5 +1,9 @@
 import { request } from "./client.js";
 
+export async function getUserByToken() {
+  return request("/auth/me");
+}
+
 export async function getUserByEmail(email) {
   return request("/user", { email })
 }

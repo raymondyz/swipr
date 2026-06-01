@@ -13,14 +13,15 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
   const [name, setName] = useState("")
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState(true);
-  const [confirmPassword, setConfirmPassword] = useState(true);
-  const [error, setError] = useState("")
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
 
   const eyeToggle = () => {
     console.log("eye toggled");
-    setPassword(!password);
+    setShowPassword(!showPassword);
   }
 
   async function handleSignup(e) {
@@ -101,7 +102,7 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
         <input
           className="credentialsBox"
           id="password"
-          type={password ? "password":"text"}
+          type={showPassword ? "password":"text"}
           onChange={(e) => setPassword(e.target.value)}
         />
           
@@ -109,7 +110,7 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
         <input
           className="credentialsBox"
           id="confirm-password"
-            type={password ? "password":"text"}
+            type={showPassword ? "password":"text"}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
         <button

@@ -63,11 +63,10 @@ function MessageBar({ chatUserId, fetchMessages }) {
         onChange={e => setMessage(e.target.value)}
         value={message}
       />
-      <input
+      <button
         className={styles.sendButton}
         type="submit"
-        value="Send" 
-      />
+      >Send</button>
     </form>
   </>
 }

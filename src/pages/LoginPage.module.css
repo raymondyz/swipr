@@ -20,6 +20,12 @@
   border-radius: 10px;
   gap: 20px;
 
+  img {
+    object-fit: contain;
+    max-height: 100px;
+    width: auto;
+  }
+
   .credentialsContainer {
     display: flex;
     flex-direction: column;
@@ -49,7 +55,7 @@
   h2 {
     margin: 0;
   }
-  
+
   p {
     margin: 0;
   }

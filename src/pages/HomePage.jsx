@@ -29,8 +29,7 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
   return (
     <div className={styles.homePage}>
       <div className={styles.navbar}>
-        <img src="src/assets/images/swiprLogo.png" alt="Logo" className="Logo"></img>
-        <img src="src/assets/images/animepfp.jpg" alt="PFP" className="PFP"></img>
+        <img src="src/assets/images/swiprLogo.png" alt="Logo"></img>
         <p>{user?.email}</p>
         <div className={styles.navContainer}>
           <button onClick={() => setPanel(Panels.PROFILE)} type="submit">Profile</button>

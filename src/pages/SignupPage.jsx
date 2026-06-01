@@ -113,9 +113,8 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
             src={`src/assets/images/${showPassword ? "eye-open" : "eye-hidden"}.png`}
           />
         </button>
-        <button className="bigAhhButton" type="submit">Signup</button>
+        <button type="submit">Signup</button>
       </div>
-
     </form>
 
     {isLoading && <p>Loading...</p>}
@@ -164,22 +163,27 @@ function VerificationPanel({ setPage, auth: {user, setUser} }) {
       {isCodeSent ? (
         <>
           <form onSubmit={handleCodeSubmit}>
-            <label htmlFor="code">Code:</label>
-            <input
-              id="code"
-              onChange={(e) => setCode(e.target.value)}
-            />
-            <button type="submit">Submit</button>
+            <div className={styles.credentialsContainer}>
+              <label htmlFor="code">Code:</label>
+              <input
+                id="code"
+                onChange={(e) => setCode(e.target.value)}
+              />
+              <button type="submit">Submit</button>
+            </div>
           </form>
-          <p>{error}</p>
+          {error && <p>{error}</p>}
           <p>Please check your spam folder!</p>
-          <p>Didn't get a code? <a onClick={handleSendCode}>Resend</a></p>
+          <div className={styles.switchPageText}>
+            <p>Didn't get a code?</p>
+            <a onClick={handleSendCode}>Resend</a>
+          </div>
         </>
       ) : (
         <>
           <h2>Verify Your Email: {user.email}</h2>
           <button onClick={handleSendCode}>Send Code</button>
-          <p>{error}</p>
+          {error && <p>{error}</p>}
         </>
       )}
     </>
@@ -199,7 +203,7 @@ function SignupPage({ setPage, auth: {user, setUser} }) {
   return (
     <div className={styles.loginPage}>
       <div className={styles.loginCard}>
-        <img src="src/assets/images/swiprLogo.png" alt="Logo" className="Logo"></img>
+        <img src="src/assets/images/swiprLogo.png" alt="Logo"></img>
           <h2>Sign Up to Start Swiping!</h2>
           
           {panel === Panels.REGISTRATION && <RegistrationPanel setPanel={setPanel} auth={{user, setUser}} />}

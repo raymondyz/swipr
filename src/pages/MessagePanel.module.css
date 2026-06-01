@@ -16,7 +16,7 @@
 
   overflow: scroll;
 
-  background-color: lightgray;
+  background-color: var(--color-background);
 
   .chatButton {
     background-color: gray;

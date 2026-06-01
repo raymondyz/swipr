@@ -1,0 +1,53 @@
+.homePage{
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+
+  color: var(--color-text);
+}
+
+.navbar {
+  background-color: var(--color-secondary);
+
+  width: 250px;
+  height: 100%;
+  overflow: scroll;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  gap: 10px;
+  padding: 10px;
+}
+
+.navContainer {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: start;
+
+  gap: 10px;
+
+  button {
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    padding: 10px;
+
+    &:hover {
+      background-color: var(--color-accent-select);
+    }
+  }
+}
+
+.panelContainer {
+  width: 100%;
+  overflow: scroll;
+}

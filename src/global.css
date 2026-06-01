@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+}
+
+#root {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+:root {
+  --color-background: gray;
+  --color-primary: rgb(160, 160, 160);
+  --color-primary-select: rgb(180, 180, 180);
+  --color-secondary: #2774AE;
+  --color-secondary-select: #3886c3;
+  --color-accent: #FFB81C;
+  --color-accent-select: #FFC72C;
+
+  --color-text: black;
+  --color-text-contrast: white;
+}

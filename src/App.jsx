@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import "./App.css"
+import "./global.css"
 import { Pages } from "./constants/pages"
 import LoginPage from "./pages/LoginPage"
 import HomePage from "./pages/HomePage"

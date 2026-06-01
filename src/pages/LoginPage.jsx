@@ -3,16 +3,14 @@ import { Pages } from "../constants/pages"
 import { validateLogin } from "../utils/api/authApi"
 import { getUserByEmail } from "../utils/api/userApi"
 
+import styles from "./LoginPage.module.css"
+
 function LoginPage({ setPage, auth: {user, setUser} }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false)
-
-  const eyeToggle = () => {
-    console.log("eye toggled");
-    setPassword(!password);
-  }
 
   async function handleLogin(e) {
     e.preventDefault()
@@ -45,50 +43,45 @@ function LoginPage({ setPage, auth: {user, setUser} }) {
   }
 
   return (
-    <div className="loginCard">
-      <div className="pageCard">
-        <button onClick={() => setPage(Pages.LOGIN)}>Login Page</button>
-        <button onClick={() => setPage(Pages.SIGNUP)}>Signup Page</button>
-      </div>
-      <div className="loginInfoBox">
+    <div className={styles.loginPage}>
+      <div className={styles.loginCard}>
         <img src="src/assets/images/swiprLogo.png" alt="Logo" className="Logo"></img>
         <h2>Login to Start Swiping!</h2>
         
         <form onSubmit={handleLogin}>
-          <div className="emailAndPasswordBox">
+          <div className={styles.credentialsContainer}>
             <label htmlFor="email">Email:</label>
             <input
-              className="credentialsBox"
               id="email"
               onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="password">Password:</label>
             <input
-            className="credentialsBox"
               id="password"
-              type = {password ? "password":"text"}
+              type = {showPassword ? "text" : "password"}
               onChange={(e) => setPassword(e.target.value)}
             />
             <button
-              className="buttonHidden"
+              className={styles.hideToggle}
               type="button"
-              onClick={eyeToggle}
-              style={{outline:'none'}}
+              onClick={() => setShowPassword(!showPassword)}
             >
               <img
-                src="src/assets/images/eye.png"
-                style={{width:'20px',height:'20px'}}
+                src={`src/assets/images/${showPassword ? "eye-open" : "eye-hidden"}.png`}
               />
             </button>
-            <button className= "bigAhhButton" type="submit">Login</button>
+            <button type="submit">Login</button>
           </div>
 
         </form>
 
         {isLoading && <p>Loading...</p>}
-        <p>{error}</p>
+        {error && <p>{error}</p>}
 
-        <p>Don't have an account? <a onClick={() => setPage(Pages.SIGNUP)}>Create Account</a></p>
+        <div className={styles.switchPageText}>
+          <p>Don't have an account?</p>
+          <a onClick={() => setPage(Pages.SIGNUP)}>Create Account</a>
+        </div>
       </div>
     </div>
   )

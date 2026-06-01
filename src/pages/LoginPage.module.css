@@ -1,0 +1,63 @@
+.loginPage {
+  height: 100%;
+  width: 100%;
+
+  background-color: var(--color-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  gap: 10px;
+}
+
+.loginCard {
+  background-color: var(--color-accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 50px;
+  border-radius: 10px;
+  gap: 20px;
+
+  .credentialsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+  }
+
+  .hideToggle {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+
+    img {
+      height: 20px;
+      width: 20px;
+      object-fit: contain;
+    }
+  }
+
+  input {
+    background-color: var(--color-accent-dull);
+    outline: none;
+    border: none;
+  }
+
+  h2 {
+    margin: 0;
+  }
+  
+  p {
+    margin: 0;
+  }
+
+  .switchPageText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}

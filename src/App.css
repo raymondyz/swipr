@@ -14,54 +14,6 @@
     background-color: rgb(239, 232, 193);
 } */
 
-.loginCard{
-    background-color: #2774ae;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 25px;
-    gap: 10px;
-}
-
-.loginInfoBox{
-    background-color: #5764ae;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 25px;
-    border-radius: 10px;
-}
-
-.pageCard{
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-}
-
-.emailAndPasswordBox{
-    display: flex;
-    flex-direction: column;
-    gap: 10px
-}
-
-.credentialsBox{
-    padding:10px;
-    width: 240px;
-}
-
-button{
-    font-family: 'Open Sans', sans-serif;
-    border: none;
-    outline: none;
-    background-color: #5774ae;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    padding: 0px;
-    border-radius: 5px;
-}
 
 .Logo{
     height: 80px;
@@ -113,12 +65,4 @@ button{
 .debugMenu{
     color: rgb(60, 2, 96);
     background-color: rgb(185, 233, 185);
-}
-
-.buttonHidden{
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    cursor: pointer;
 }

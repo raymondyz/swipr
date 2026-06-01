@@ -4,6 +4,8 @@ import { validateSignupEmail, validateSignupPassword, passwordRequirements } fro
 import { registerUser, sendVerificationCode, validateVerificationCode } from "../utils/api/authApi"
 import { getUserByEmail } from "../utils/api/userApi"
 
+import styles from "./LoginPage.module.css"
+
 const Panels = Object.freeze({
   REGISTRATION: "registration",
   EMAIL_VERIFICATION: "EMAIL_verification",
@@ -18,11 +20,6 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
-
-  const eyeToggle = () => {
-    console.log("eye toggled");
-    setShowPassword(!showPassword);
-  }
 
   async function handleSignup(e) {
     e.preventDefault()
@@ -76,52 +73,45 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
     }
   }
 
-  return (<>   
+  return <>   
     <form onSubmit={handleSignup}>
-      <div className="emailAndPasswordBox">
+      <div className={styles.credentialsContainer}>
         <label htmlFor="name">Name:</label>
         <input
-          className="credentialsBox"
           id="name"
           onChange={(e) => setName(e.target.value)}
         />
         <label htmlFor="username">Username:</label>
         <input
-          className="credentialsBox"
           id="username"
           onChange={(e) => setUsername(e.target.value)}
         />
         <label htmlFor="email">Email:</label>
         <input
-          className="credentialsBox"
           id="email"
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <label htmlFor="password">Password:</label>
         <input
-          className="credentialsBox"
           id="password"
-          type={showPassword ? "password":"text"}
+          type={showPassword ? "text" : "password"}
           onChange={(e) => setPassword(e.target.value)}
         />
           
         <label htmlFor="confirm-password">Confirm Password:</label>
         <input
-          className="credentialsBox"
           id="confirm-password"
-            type={showPassword ? "password":"text"}
+          type={showPassword ? "text" : "password"}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
         <button
-          className="buttonHidden"
+          className={styles.hideToggle}
           type="button"
-          onClick={eyeToggle}
-          style={{outline:'none'}}
+          onClick={() => setShowPassword(!showPassword)}
         >
           <img
-            src="src/assets/images/eye.png"
-            style={{width:'20px',height:'20px'}}
+            src={`src/assets/images/${showPassword ? "eye-open" : "eye-hidden"}.png`}
           />
         </button>
         <button className="bigAhhButton" type="submit">Signup</button>
@@ -130,8 +120,8 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
     </form>
 
     {isLoading && <p>Loading...</p>}
-    <p>{error}</p>
-  </>)
+    {error && <p>{error}</p>}
+  </>
 }
 
 function VerificationPanel({ setPage, auth: {user, setUser} }) {
@@ -208,19 +198,18 @@ function SignupPage({ setPage, auth: {user, setUser} }) {
   }, [user])
 
   return (
-    <div className="loginCard">
-      <div className="pageCard">
-          <button onClick={() => setPage(Pages.LOGIN)}>Login Page</button>
-          <button onClick={() => setPage(Pages.SIGNUP)}>Signup Page</button>
-      </div>
-      <div className="loginInfoBox">
+    <div className={styles.loginPage}>
+      <div className={styles.loginCard}>
         <img src="src/assets/images/swiprLogo.png" alt="Logo" className="Logo"></img>
-          <h2>Create an Account to Start Swiping!</h2>
+          <h2>Sign Up to Start Swiping!</h2>
           
           {panel === Panels.REGISTRATION && <RegistrationPanel setPanel={setPanel} auth={{user, setUser}} />}
           {panel === Panels.EMAIL_VERIFICATION && <VerificationPanel setPage={setPage} auth={{user, setUser}} />}
 
-          <p>Already have an account? <a onClick={() => setPage(Pages.LOGIN)}>Login</a></p>
+          <div className={styles.switchPageText}>
+            <p>Already have an account?</p>
+            <a onClick={() => setPage(Pages.LOGIN)}>Login</a>
+          </div>
       </div>
     </div>
   )

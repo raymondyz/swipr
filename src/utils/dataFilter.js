@@ -1,6 +1,9 @@
 import { Avails } from "../constants/filter_avail";
 
-export function filterUsers(data, swipeAvail, loc, timeAvail) {
+export function filterUsers(data, filters) {
+
+    const { swipeAvail, location, timeAvail, weekday, hour } = filters;
+
     let newData = data;
 
     if (swipeAvail !== "null") {
@@ -31,6 +34,45 @@ export function filterUsers(data, swipeAvail, loc, timeAvail) {
             }
             
             
+        } else if (timeAvail === Avails.SELECTING_HOUR) {
+            let targetIndexWeekday = -1;
+            if (weekday !== "null") {
+                targetIndexWeekday = 0;
+                for (const [day, label] of Object.entries(Avails.WEEKDAYS)) {
+                    if (weekday === label) {
+                        break;
+                    }
+                    targetIndexWeekday++;
+                }
+            }
+            let targetIndexHour = -1;
+            if (hour !== "null") {
+                targetIndexHour = 0;
+                for (const [h, label] of Object.entries(Avails.HOURS).sort(([a], [b]) => a.localeCompare(b))) {
+                    if (hour === h) {
+                        break;
+                    }
+                    targetIndexHour++;
+                }
+            }
+            console.log(Object.entries(Avails.HOURS).sort(([a], [b]) => a.localeCompare(b)));
+            console.log(weekday, hour, targetIndexWeekday, targetIndexHour);
+            newData = newData.filter(n => {
+
+                const avail = n["availability"];
+
+                if (targetIndexWeekday === -1 && targetIndexHour === -1) { // wildcards
+                    return avail?.some(day => day?.some(v => v === true));
+                }
+                if (targetIndexWeekday === -1) {
+                    return avail?.some(day => day?.[targetIndexHour] === true);
+                }
+                if (targetIndexHour === -1) {
+                    return avail[targetIndexWeekday]?.some(v => v === true);
+                }
+
+                return avail?.[targetIndexWeekday]?.[targetIndexHour] === true;
+            });
         }
         
 

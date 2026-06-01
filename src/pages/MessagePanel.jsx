@@ -109,8 +109,6 @@ function MessagePanel({ setPage, auth: {user, setUser} }) {
     return () => {clearInterval(id)};
   }, [chatUserId]);
 
-  console.log(data)
-
   return <>
     <div className={styles.mainContainer} >
       <MessageSidebar

@@ -1,0 +1,31 @@
+.messageLine {
+  display: flex;
+}
+
+.messageBubble {
+  border-radius: 15px;
+
+  padding: 10px;
+
+  p {
+    margin: 0;
+  }
+}
+
+/* For messages received from other person */
+.messageLine {
+  justify-content: flex-start;
+
+  .messageBubble {
+    background-color: lightgray;
+  }
+}
+
+/* For messages sent by self */
+.ownMessage.messageLine {
+  justify-content: flex-end;
+
+  .messageBubble {
+    background-color: lightskyblue;
+  }
+}

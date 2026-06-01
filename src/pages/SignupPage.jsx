@@ -58,11 +58,10 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
 
     // Try to register user
     try {
-      await registerUser(name, username, email, password)
+      const newUser = await registerUser(name, username, email, password)
 
       // Register successful
-      setUser(await getUserByEmail(email))
-      console.log("Registration successful")
+      setUser(newUser)
       setPanel(Panels.EMAIL_VERIFICATION)
     }
     catch (err) {

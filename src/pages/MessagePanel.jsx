@@ -36,6 +36,8 @@ function MessageBar({ chatUserId, fetchMessages }) {
   const [message, setMessage] = useState("");
 
   async function handleSend() {
+    if (message.trim().length === 0) return;
+    
     await sendMessage(chatUserId, message)
     await fetchMessages()
     setMessage("")

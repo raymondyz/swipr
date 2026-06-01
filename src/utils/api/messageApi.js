@@ -7,3 +7,7 @@ export async function getMessages(otherId) {
 export async function sendMessage(otherId, content) {
   return request("/message/send", { otherId, content })
 }
+
+export async function getAllChatUsers() {
+  return request("/message/get-all-chats")
+}

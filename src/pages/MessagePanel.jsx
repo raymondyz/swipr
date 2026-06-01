@@ -2,18 +2,26 @@ import { useState, useEffect } from "react"
 import { Pages } from "../constants/pages"
 import { validateLogin } from "../utils/api/authApi"
 import { getUserByEmail } from "../utils/api/userApi"
-import { getMessages, sendMessage } from "../utils/api/messageApi.js"
+import { getMessages, sendMessage, getAllChatUsers } from "../utils/api/messageApi.js"
 import TextMessage from "../components/TextMessage.jsx"
 
 import styles from "./MessagePanel.module.css"
 import clsx from "clsx"
 
 
-function MessageSidebar({ chatUserId, setChatUserId, fetchMessages }) {
+function MessageSidebar({ chatUserId, setChatUserId, chatList }) {
+  console.log(chatList)
   return <>
     <div className={styles.sidebarContainer} >
-      <button onClick={() => setChatUserId("7ee5a007-5dae-4e65-b62c-d6326f8b983b")}>Kenneth</button>
-      <button onClick={() => setChatUserId("1cfca496-8341-4d18-833b-807f3d66ba1c")}>Raymond</button>
+      {chatList.map(user =>
+        <button
+          className={styles.chatButton}
+          onClick={() => setChatUserId(user.id)}
+        >
+          <p className={styles.name}>{user.name}</p>
+          <p className={styles.username}>{user.username}</p>
+        </button>
+      )}
     </div>
   </>
 }
@@ -35,7 +43,9 @@ function MessageHistory({ data, user }) {
 function MessageBar({ chatUserId, fetchMessages }) {
   const [message, setMessage] = useState("");
 
-  async function handleSend() {
+  async function handleSend(e) {
+    e.preventDefault();
+
     if (message.trim().length === 0) return;
     
     await sendMessage(chatUserId, message)
@@ -44,17 +54,21 @@ function MessageBar({ chatUserId, fetchMessages }) {
   }
 
   return <>
-    <div className={styles.messageBar}>
+    <form
+      className={styles.messageBar}
+      onSubmit={handleSend}
+    >
       <input
         className={styles.composeBox}
         onChange={e => setMessage(e.target.value)}
         value={message}
       />
-      <button
+      <input
         className={styles.sendButton}
-        onClick={handleSend}
-      >Send</button>
-    </div>
+        type="submit"
+        value="Send" 
+      />
+    </form>
   </>
 }
 
@@ -62,6 +76,7 @@ function MessageBar({ chatUserId, fetchMessages }) {
 function MessagePanel({ setPage, auth: {user, setUser} }) {
   const [data, setData] = useState(null);
   const [chatUserId, setChatUserId] = useState("");
+  const [chatList, setChatList] = useState([]);
 
   async function fetchMessages() {
     const messages = await getMessages(chatUserId)
@@ -75,6 +90,13 @@ function MessagePanel({ setPage, auth: {user, setUser} }) {
     fetchMessages(chatUserId, setData);
   }, [chatUserId]);
 
+  // Fetch all chats
+  useEffect(() => {
+    async function fetchChats() {
+      setChatList(await getAllChatUsers());
+    }
+    fetchChats();
+  }, [])
 
   // Fetch message every 5 seconds
   useEffect(() => {
@@ -87,12 +109,14 @@ function MessagePanel({ setPage, auth: {user, setUser} }) {
     return () => {clearInterval(id)};
   }, [chatUserId]);
 
+  console.log(data)
+
   return <>
     <div className={styles.mainContainer} >
       <MessageSidebar
         chatUserId={chatUserId}
         setChatUserId={setChatUserId}
-        fetchMessages={fetchMessages}
+        chatList={chatList}
       />
       {chatUserId !== "" &&
         <div className={styles.chatWindow} >

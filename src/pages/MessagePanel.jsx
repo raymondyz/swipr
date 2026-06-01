@@ -74,17 +74,16 @@ function MessagePanel({ setPage, auth: {user, setUser} }) {
   }, [chatUserId]);
 
 
-  // // Fetch message every 5 seconds
-  // useEffect(() => {
-  //   if (!chatUserId) return;
+  // Fetch message every 5 seconds
+  useEffect(() => {
+    if (!chatUserId) return;
 
-  //   const id = setInterval(() => {
-  //     console.log("HELLO");
-  //     // fetchMessages();
-  //   }, 1 * 1000);
+    const id = setInterval(() => {
+      fetchMessages();
+    }, 5 * 1000);
 
-  //   return () => {clearInterval(id)};
-  // }, [chatUserId]);
+    return () => {clearInterval(id)};
+  }, [chatUserId]);
 
   return <>
     <div className={styles.mainContainer} >

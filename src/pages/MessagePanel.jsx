@@ -9,10 +9,11 @@ import styles from "./MessagePanel.module.css"
 import clsx from "clsx"
 
 
-function MessageSidebar({ receiverId, setReceiverId }) {
+function MessageSidebar({ chatUserId, setChatUserId, fetchMessages }) {
   return <>
     <div className={styles.sidebarContainer} >
-
+      <button onClick={() => setChatUserId("7ee5a007-5dae-4e65-b62c-d6326f8b983b")}>Kenneth</button>
+      <button onClick={() => setChatUserId("1cfca496-8341-4d18-833b-807f3d66ba1c")}>Raymond</button>
     </div>
   </>
 }
@@ -31,11 +32,26 @@ function MessageHistory({ data, user }) {
   </>
 }
 
-function MessageBar() {
+function MessageBar({ chatUserId, fetchMessages }) {
+  const [message, setMessage] = useState("");
+
+  async function handleSend() {
+    await sendMessage(chatUserId, message)
+    await fetchMessages()
+    setMessage("")
+  }
+
   return <>
     <div className={styles.messageBar}>
-      <input className={styles.composeBox}/>
-      <button className={styles.sendButton}>Send</button>
+      <input
+        className={styles.composeBox}
+        onChange={e => setMessage(e.target.value)}
+        value={message}
+      />
+      <button
+        className={styles.sendButton}
+        onClick={handleSend}
+      >Send</button>
     </div>
   </>
 }
@@ -43,30 +59,51 @@ function MessageBar() {
 
 function MessagePanel({ setPage, auth: {user, setUser} }) {
   const [data, setData] = useState(null);
-  const [receiverId, setReceiverId] = useState("7ee5a007-5dae-4e65-b62c-d6326f8b983b");
+  const [chatUserId, setChatUserId] = useState("");
 
-  useEffect(() => {
-    async function test() {
-      console.log(user.id)
-      const messages = await getMessages(receiverId)
-      setData(messages)
-    }
-    test();
-  }, []);
-
-  if (!data) {
-    return;
+  async function fetchMessages() {
+    const messages = await getMessages(chatUserId)
+    setData(messages)
   }
 
-  console.log(data)
+  // Fetch message from when chat changes
+  useEffect(() => {
+    if (!chatUserId) return;
 
-  return <div className={styles.mainContainer} >
-    <MessageSidebar />
-    <div className={styles.chatWindow} >
-      <MessageHistory data={data} user={user} />
-      <MessageBar />
+    fetchMessages(chatUserId, setData);
+  }, [chatUserId]);
+
+
+  // // Fetch message every 5 seconds
+  // useEffect(() => {
+  //   if (!chatUserId) return;
+
+  //   const id = setInterval(() => {
+  //     console.log("HELLO");
+  //     // fetchMessages();
+  //   }, 1 * 1000);
+
+  //   return () => {clearInterval(id)};
+  // }, [chatUserId]);
+
+  return <>
+    <div className={styles.mainContainer} >
+      <MessageSidebar
+        chatUserId={chatUserId}
+        setChatUserId={setChatUserId}
+        fetchMessages={fetchMessages}
+      />
+      {chatUserId !== "" &&
+        <div className={styles.chatWindow} >
+          <MessageHistory data={data} user={user} />
+          <MessageBar
+            chatUserId={chatUserId}
+            fetchMessages={fetchMessages}
+          />
+        </div>
+      }
     </div>
-  </div>
+  </>
   
 }
 

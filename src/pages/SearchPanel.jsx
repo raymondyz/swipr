@@ -80,7 +80,7 @@ function SearchPanel({ setPanel, auth: {user, setUser} }) {
             <option value="" disabled>
                 Select a weekday!
             </option>
-            <option value={"null"} >Any Weekday</option>
+            <option value={"null"} >Any weekday</option>
             {Object.entries(Avails.WEEKDAYS).map(([day, label]) => (
                 <option key={day} value={label}>
                 {label}
@@ -95,7 +95,7 @@ function SearchPanel({ setPanel, auth: {user, setUser} }) {
             <option value="" disabled>
                 Select an hour!
             </option>
-            <option value={"null"} >Any Weekday</option>
+            <option value={"null"} >Any hour</option>
             {Object.entries(Avails.HOURS)
             .sort(([a], [b]) => a.localeCompare(b))
             .map(([k, v]) => (

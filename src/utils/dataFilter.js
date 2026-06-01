@@ -36,7 +36,7 @@ export function filterUsers(data, filters) {
             
         } else if (timeAvail === Avails.SELECTING_HOUR) {
             let targetIndexWeekday = -1;
-            if (weekday !== null) {
+            if (weekday !== "null") {
                 targetIndexWeekday = 0;
                 for (const [day, label] of Object.entries(Avails.WEEKDAYS)) {
                     if (weekday === label) {
@@ -46,7 +46,7 @@ export function filterUsers(data, filters) {
                 }
             }
             let targetIndexHour = -1;
-            if (hour !== null) {
+            if (hour !== "null") {
                 targetIndexHour = 0;
                 for (const [h, label] of Object.entries(Avails.HOURS).sort(([a], [b]) => a.localeCompare(b))) {
                     if (hour === h) {

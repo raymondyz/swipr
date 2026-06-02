@@ -1,0 +1,17 @@
+.restaurantPanel{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+}
+
+.restaurantCard{
+  background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 1em;
+  &:hover{
+    background-color: var(--color-primary-select);
+  }
+}

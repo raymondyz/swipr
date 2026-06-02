@@ -107,7 +107,7 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
         <button
           className={styles.hideToggle}
           type="button"
-          onClick={() => setShowPassword(!showPassword)}
+          onClick={() => setShowPassword(prev => !prev)}
         >
           <img
             src={`src/assets/images/${showPassword ? "eye-open" : "eye-hidden"}.png`}

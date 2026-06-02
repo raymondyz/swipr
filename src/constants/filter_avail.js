@@ -36,3 +36,9 @@ export const Avails = Object.freeze({
     
 
 });
+
+export const SwipeAvailLabel = Object.freeze({
+  offer_swipes: "Offering Swipes",
+  self_swipes: "Swiping Themselves",
+  need_swipes: "Needs Swipes",
+})

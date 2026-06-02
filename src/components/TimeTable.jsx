@@ -3,7 +3,7 @@ import { useState, Fragment } from "react"
 import styles from "./TimeTable.module.css"
 import clsx from "clsx"
 
-function TimeTable({ availability, updateAvailability }) {
+function TimeTable({ availability, updateAvailability = null }) {
   const timeList = [
     "6:00am", "7:00am", "8:00am", "9:00am",
     "10:00am", "11:00am", "12:00pm",
@@ -23,6 +23,10 @@ function TimeTable({ availability, updateAvailability }) {
 
   const handleMouseDown = (dayIndex, timeIndex, event) => {
     event.preventDefault();
+
+    // Ignore if table is read only
+    if (updateAvailability === null) return;
+
     const original = cloneAvailability(availability);
     const toggleValue = !availability[dayIndex][timeIndex];
 
@@ -40,6 +44,9 @@ function TimeTable({ availability, updateAvailability }) {
   };
 
   const handleMouseEnter = (dayIndex, timeIndex) => {
+    // Ignore if table is read only
+    if (updateAvailability === null) return;
+
     if (!isSelecting || !startCell || !dragOriginal) return;
 
     updateAvailability(dayIndex, timeIndex, {
@@ -51,6 +58,9 @@ function TimeTable({ availability, updateAvailability }) {
   };
 
   const handleMouseUp = () => {
+    // Ignore if table is read only
+    if (updateAvailability === null) return;
+
     if (!isSelecting) return;
     setIsSelecting(false);
     setStartCell(null);

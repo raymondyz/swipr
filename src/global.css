@@ -52,7 +52,7 @@ button {
   }
 }
 
-input {
+input, select {
   background-color: var(--color-secondary);
   padding: 10px;
   border-radius: 10px;

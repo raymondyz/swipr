@@ -2,8 +2,8 @@
   font-size: 35px;
   cursor: pointer;
 
-  color: gray;
+  color: var(--color-info-gray);
   &.selected {
-    color: gold;
+    color: var(--color-info-gold);
   }
 }

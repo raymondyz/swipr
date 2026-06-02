@@ -2,6 +2,7 @@ import { useState } from "react"
 import { SwipeAvailLabel } from "../constants/filter_avail";
 
 import TimeTable from "../components/TimeTable";
+import DiningHallRatings from "./DiningHallRatings";
 
 import styles from "./ProfileCard.module.css";
 import clsx from "clsx";
@@ -50,11 +51,7 @@ function ProfileCard({profile}) {
           {location_preferences && (
             <div className={styles.contentBlock}>
               <h3>Location preferences:</h3>
-              <ul>
-                {Object.keys(location_preferences).map(location => (
-                  <p>{location}</p>
-                ))}
-              </ul>
+              <DiningHallRatings locationPref={location_preferences} condensed={true} />
             </div>
           )}
 

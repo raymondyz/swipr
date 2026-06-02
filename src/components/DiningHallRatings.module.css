@@ -23,4 +23,21 @@
     width: 150px;
     object-fit: contain;
   }
+
+  .diningHallName {
+    width: 120px;
+    text-align: center;
+  }
+}
+
+.condensed {
+  &.diningHallsContainer {
+    gap: 0px;
+  }
+
+  &.diningHallRating {
+    border: none;
+    height: auto;
+    padding: 0 10px;
+  }
 }

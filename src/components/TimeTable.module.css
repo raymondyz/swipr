@@ -26,9 +26,9 @@
   cursor: pointer;
 
   /* Not available */
-  background-color: #efa49e; /*e79690*/
+  background-color: var(--color-info-red);
 
   &.available {
-    background-color: #adeeb0; /*8bd490*/
+    background-color: var(--color-info-green);
   }
 }

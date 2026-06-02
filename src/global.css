@@ -14,6 +14,12 @@
 
   --color-text: black;
   --color-text-contrast: white;
+
+  --color-info-red: #efa49e; /*e79690*/
+  --color-info-green: #adeeb0; /*8bd490*/
+  --color-info-blue: lightskyblue;
+  --color-info-gray: lightgray;
+  --color-info-gold: gold;
 }
 
 * {

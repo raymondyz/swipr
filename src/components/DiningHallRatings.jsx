@@ -1,19 +1,24 @@
 import StarRating from "./StarRating"
 
 import styles from "./DiningHallRatings.module.css"
+import clsx from "clsx"
 
-function DiningHall({ rating, onRate, locationImgPath, locationName }) {
+function DiningHall({ rating, onRate, locationImgPath, locationName, condensed }) {
   return <>
-    <div className={styles.diningHallRating}>
-      <img
-        src={locationImgPath}
-        alt={locationName}
-      />
+    <div className={clsx(styles.diningHallRating, condensed && styles.condensed)}>
+      {condensed ? (
+        <h3 className={styles.diningHallName}>{locationName}</h3>
+      ) : (
+        <img
+          src={locationImgPath}
+          alt={locationName}
+        />
+      )}
       <StarRating
         rating={rating}
         onRate={onRate}
       />
-      <h3>Rating: {rating}/5</h3>
+      {condensed || <h3>Rating: {rating}/5</h3>}
     </div>
   </>
 }
@@ -21,15 +26,15 @@ function DiningHall({ rating, onRate, locationImgPath, locationName }) {
 const locations = Object.freeze({
   bcafe: "BCafe",
   bplate: "BPlate",
-  cafe1919: "Cafe1919",
-  deneve: "DeNeve",
+  cafe1919: "Cafe 1919",
+  deneve: "De Neve",
   epicuria: "Epicuria",
   feast: "Feast",
-  thedrey: "TheDrey",
-  thestudy: "TheStudy",
-  foodtrucks: "FoodTrucks",
+  thedrey: "The Drey",
+  thestudy: "The Study",
+  foodtrucks: "Food Trucks",
   rendevous: "Rendevous",
-  bruinbowl: "BruinBowl"
+  bruinbowl: "Bruin Bowl"
 })
 
 const locImgPaths = Object.freeze({
@@ -46,20 +51,24 @@ const locImgPaths = Object.freeze({
   bruinbowl: "src/assets/images/bruinbowl.svg"
 })
 
-function DiningHallRatings({ locationPref, setLocationPref}) {
+function DiningHallRatings({ locationPref, setLocationPref = null, condensed = false}) {
   return <>
-    <div className={styles.diningHallsContainer}>
+    <div className={clsx(styles.diningHallsContainer, condensed && styles.condensed)}>
       {Object.keys(locations).map(loc => (
         <DiningHall
           key={loc}
           rating={locationPref[loc]}
           onRate={(val) => setLocationPref(prev => {
+            // Ignore if view only
+            if (setLocationPref === null) return;
+
             const newPref = {...prev}
             newPref[loc] = val
             return newPref
           })}
           locationImgPath={locImgPaths[loc]}
           locationName={locations[loc]}
+          condensed={condensed}
         />
       ))}
     </div>

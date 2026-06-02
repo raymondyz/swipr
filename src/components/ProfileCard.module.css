@@ -42,7 +42,7 @@
   justify-content: stretch;
   flex-wrap: wrap;
 
-  gap: 20px;
+  gap: 40px;
 }
 
 .contentBlock {
@@ -50,9 +50,10 @@
   flex-direction: column;
 
   gap: 20px;
-
+ 
   &.timeTable {
-    width: 600px;
+    flex-grow: 1;
+    min-width: 450;
   }
 }
 
@@ -63,12 +64,12 @@
   font-weight: bold;
   color: var(--color-text);
 
-  background-color: lightsteelblue;
+  background-color: var(--color-info-blue);
 
   &.green {
-    background-color: lightgreen;
+    background-color: var(--color-info-green);
   }
   &.red {
-    background-color: lightcoral;
+    background-color: var(--color-info-red);
   }
 }

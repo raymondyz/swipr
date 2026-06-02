@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import { useState } from "react"
 import { SwipeAvailLabel } from "../constants/filter_avail";
 
-import styles from "./ProfileCard.module.css"; 
+import TimeTable from "../components/TimeTable";
+
+import styles from "./ProfileCard.module.css";
+import clsx from "clsx";
 
 
 function ProfileCard({profile}) {
@@ -14,25 +17,39 @@ function ProfileCard({profile}) {
   const availability = profile.availability
   const notes = profile.notes
 
-  return (
+  return <>
     <div
+      className={styles.profileCard}
       onClick={() => setExpanded(prev => !prev)}
       role="button"
     >
-      <div style={{display: "flex", flexDirection: "row", gap: "10px", alignItems: "center"}}>
-        <img src="src/assets/images/animepfp.jpg" alt="pfp" style={{height: "60px", width: "auto"}}></img>
-        <div style={{display: "flex", flexDirection: "row", gap: "20px"}}>
+      <div className={styles.header} >
+        <img src="src/assets/images/animepfp.jpg" alt="pfp" />
+        <div className={styles.nameContainer}>
           <h2>{name}</h2>
-          {/* <p>{username}</p> Why do we need to show this in the search panel? */}
-          <h2>Swipe: {swipe_availability}</h2>
+          <div className={clsx(
+            styles.tag,
+            swipe_availability == "offer_swipes" && styles.green,
+            swipe_availability == "need_swipes" && styles.red
+          )}>
+            {SwipeAvailLabel[swipe_availability]}
+          </div>
         </div>
       </div>
 
       {expanded && (
-        <div className={styles.expandedInfo}>
+        <div className={styles.contentContainer}>
+
+          {availability && (
+            <div className={clsx(styles.contentBlock, styles.timeTable)}>
+              <h3>Availability:</h3>
+              <TimeTable availability={availability}/>
+            </div>
+          )}
+
           {location_preferences && (
-            <div>
-              <p>Location preferences:</p>
+            <div className={styles.contentBlock}>
+              <h3>Location preferences:</h3>
               <ul>
                 {Object.keys(location_preferences).map(location => (
                   <p>{location}</p>
@@ -41,42 +58,16 @@ function ProfileCard({profile}) {
             </div>
           )}
 
-          {availability && (
-            <div>
-              <p>Availability:</p>
-              <ul>
-                {Object.keys(availability).map(availability => (
-                  <p>{availability}</p>
-                ))}
-              </ul>
-            </div>
-          )}
-
           {notes && (
-            <div>
-              <p>Notes:</p>
+            <div className={styles.contentBlock}>
+              <h3>Notes:</h3>
               <p>{notes}</p>
             </div>
           )}
         </div>
       )}
     </div>
-  )
-  
-  // return <>
-  //   <div className={styles.profileCard}>
-  //     <div className={styles.contentBlock}>
-  //       <div className={styles.nameContainer}>
-  //         <h2 className={styles.name}>{name}</h2>
-  //         <p className={styles.username}>{username}</p>
-  //       </div>
-  //       <h3>{SwipeAvailLabel[swipe_availability]}</h3>
-  //     </div>
-  //     <div className={styles.contentBlock}>
-  //       {location_preferences && Object.keys(location_preferences).map(location => <p>{location}</p>)}
-  //     </div>
-  //   </div>
-  // </>
+  </>
 }
 
 export default ProfileCard

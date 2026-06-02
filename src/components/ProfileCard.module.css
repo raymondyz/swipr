@@ -1,16 +1,10 @@
-.expandedInfo {
-  display: flex;
-  gap: 40px;
-}
 .profileCard {
   border: 1px solid var(--color-text);
   border-radius: 20px;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: stretch;
-  justify-content: stretch;
-  flex-wrap: wrap;
 
   gap: 20px;
   padding: 20px;
@@ -20,16 +14,61 @@
   }
 }
 
-.contentBlock {
-  background-color: aquamarine;
-
+.header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+
+  img {
+    height: 60px;
+    width: auto;
+
+    border-radius: 10px;
+  }
+
+  .nameContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+  flex-wrap: wrap;
 
   gap: 20px;
 }
 
-.nameContainer {
+.contentBlock {
   display: flex;
   flex-direction: column;
+
+  gap: 20px;
+
+  &.timeTable {
+    width: 600px;
+  }
+}
+
+.tag {
+  border-radius: 100px;
+  padding: 4px 10px;
+  font-size: small;
+  font-weight: bold;
+  color: var(--color-text);
+
+  background-color: lightsteelblue;
+
+  &.green {
+    background-color: lightgreen;
+  }
+  &.red {
+    background-color: lightcoral;
+  }
 }

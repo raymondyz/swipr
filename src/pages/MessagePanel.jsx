@@ -10,12 +10,12 @@ import clsx from "clsx"
 
 
 function MessageSidebar({ chatUserId, setChatUserId, chatList }) {
-  console.log(chatList)
   return <>
     <div className={styles.sidebarContainer} >
       {chatList.map(user =>
         <button
-          className={styles.chatButton}
+          className={clsx(styles.chatButton, user.id === chatUserId && styles.selectedChat)}
+          key={user.id}
           onClick={() => setChatUserId(user.id)}
         >
           <p className={styles.name}>{user.name}</p>

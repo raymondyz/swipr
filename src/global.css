@@ -1,8 +1,8 @@
 :root {
-  --color-background: #ffffff;
+  --color-background: #f1f1f1;
 
-  --color-primary: #a0a0a0;
-  --color-primary-select: #b4b4b4;
+  --color-primary: lightgray;
+  --color-primary-select: rgb(232, 232, 232);
 
   --color-secondary: #2774AE;
   --color-secondary-select: #3886c3;

@@ -15,7 +15,6 @@
 
   width: 250px;
   height: 100%;
-  overflow: scroll;
 
   display: flex;
   flex-direction: column;

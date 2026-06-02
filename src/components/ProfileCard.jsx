@@ -1,17 +1,63 @@
-function ProfileCard({profile}) {
+import { useState } from 'react'
+import styles from "./ProfileCard.module.css"; 
+
+function ProfileCard({ profile }) {
+  const [expanded, setExpanded] = useState(false)
   const username = profile.users?.username
   const name = profile.users?.name
   const swipe_availability = profile.swipe_availability
   const location_preferences = profile.location_preferences
+  const availability = profile.availability
   const notes = profile.notes
-  
 
-  return <div style={{border: "1px solid black"}}>
-    <h2>{name}</h2>
-    <p>{username}</p>
-    <h3>Swipe: {swipe_availability}</h3>
-    {location_preferences && Object.keys(location_preferences).map(location => <p>{location}</p>)}
-  </div>
+  return (
+    <div
+      onClick={() => setExpanded(prev => !prev)}
+      role="button"
+    >
+      <div style={{display: "flex", flexDirection: "row", gap: "10px", alignItems: "center"}}>
+        <img src="src/assets/images/animepfp.jpg" alt="pfp" style={{height: "60px", width: "auto"}}></img>
+        <div style={{display: "flex", flexDirection: "row", gap: "20px"}}>
+          <h2>{name}</h2>
+          {/* <p>{username}</p> Why do we need to show this in the search panel? */}
+          <h2>Swipe: {swipe_availability}</h2>
+        </div>
+      </div>
+
+      {expanded && (
+        <div className={styles.expandedInfo}>
+          {location_preferences && (
+            <div>
+              <p>Location preferences:</p>
+              <ul>
+                {Object.keys(location_preferences).map(location => (
+                  <p>{location}</p>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {availability && (
+            <div>
+              <p>Availability:</p>
+              <ul>
+                {Object.keys(availability).map(availability => (
+                  <p>{availability}</p>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {notes && (
+            <div>
+              <p>Notes:</p>
+              <p>{notes}</p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default ProfileCard

@@ -5,6 +5,8 @@ import ProfileCard from "../components/ProfileCard";
 import { Avails } from "../constants/filter_avail";
 import { filterUsers } from "../utils/dataFilter";
 
+import styles from "./SearchPanel.module.css"
+
 function SearchPanel({ setPanel, auth: {user, setUser} }) {
   const [profiles, setProfiles] = useState(null)
   const [profilesFiltered, setProfilesFiltered] = useState(null)
@@ -115,14 +117,16 @@ function SearchPanel({ setPanel, auth: {user, setUser} }) {
     
     <button onClick={ reloadUsers }>Apply Filters</button>
     <p>Loaded {profilesFiltered.length} profiles!</p>
+    <div className={styles.profileCardBox}>
+      {profilesFiltered.length > 0 ?
+        profilesFiltered.map(
+          profile => <div className={styles.profileCard}><ProfileCard key={profile.user_id} profile={profile} /></div>
+        )
+      : 
+        <p>No profiles loaded!</p>
+      }
+    </div>
 
-    {profilesFiltered.length > 0 ?
-      profilesFiltered.map(
-        profile => <ProfileCard key={profile.user_id} profile={profile} />
-      )
-    : 
-      <p>No profiles loaded!</p>
-    }
   </>)
 
 }

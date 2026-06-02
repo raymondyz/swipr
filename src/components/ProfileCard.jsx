@@ -1,8 +1,12 @@
 import { useState } from 'react'
+import { SwipeAvailLabel } from "../constants/filter_avail";
+
 import styles from "./ProfileCard.module.css"; 
 
-function ProfileCard({ profile }) {
+
+function ProfileCard({profile}) {
   const [expanded, setExpanded] = useState(false)
+
   const username = profile.users?.username
   const name = profile.users?.name
   const swipe_availability = profile.swipe_availability
@@ -58,6 +62,21 @@ function ProfileCard({ profile }) {
       )}
     </div>
   )
+  
+  // return <>
+  //   <div className={styles.profileCard}>
+  //     <div className={styles.contentBlock}>
+  //       <div className={styles.nameContainer}>
+  //         <h2 className={styles.name}>{name}</h2>
+  //         <p className={styles.username}>{username}</p>
+  //       </div>
+  //       <h3>{SwipeAvailLabel[swipe_availability]}</h3>
+  //     </div>
+  //     <div className={styles.contentBlock}>
+  //       {location_preferences && Object.keys(location_preferences).map(location => <p>{location}</p>)}
+  //     </div>
+  //   </div>
+  // </>
 }
 
 export default ProfileCard

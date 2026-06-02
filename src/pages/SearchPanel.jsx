@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { getAllUserProfiles } from "../utils/api/userApi";
 
 import ProfileCard from "../components/ProfileCard";
-import { Avails } from "../constants/filter_avail";
+import { Avails, SwipeAvailLabel } from "../constants/filter_avail";
 import { filterUsers } from "../utils/dataFilter";
 
-import styles from "./SearchPanel.module.css"
+import styles from "./SearchPanel.module.css";
 
 function SearchPanel({ setPanel, auth: {user, setUser} }) {
   const [profiles, setProfiles] = useState(null)
@@ -32,11 +32,11 @@ function SearchPanel({ setPanel, auth: {user, setUser} }) {
 
   function reloadUsers() {
     setProfilesFiltered(filterUsers(profiles, {
-        swipeAvail: filterSwipeAvailValue,
-        location: filterLocationValue,
-        timeAvail: filterTimeAvailValue,
-        weekday: filterTimeWeekday,
-        hour: filterTimeHour
+      swipeAvail: filterSwipeAvailValue,
+      location: filterLocationValue,
+      timeAvail: filterTimeAvailValue,
+      weekday: filterTimeWeekday,
+      hour: filterTimeHour
     }));
   }
 
@@ -45,89 +45,88 @@ function SearchPanel({ setPanel, auth: {user, setUser} }) {
     return <p>Loading...</p>
   }
 
-  return (<>
-    <div style={{ alignItems: 'center' }}>
-      <select
-        name="swipesAvail"
-        value={filterSwipeAvailValue}
-        onChange={e => setFilterSwipeAvailValue(e.target.value)}
-      >
-        <option value="" disabled>
-            Choose a swipe availability!
-        </option>
-        <option value={"null"} >All swipe availabilities</option>
-        <option value={Avails.OFFER_SWIPES} >Offering Swipes</option>
-        <option value={Avails.SELF_SWIPES} >Swiping Themselves</option>
-        <option value={Avails.NEED_SWIPES} >Needs Swipes</option>
-      </select>
-      <select
-        name="timeAvail"
-        value={filterTimeAvailValue}
-        onChange={e => setFilterTimeAvailValue(e.target.value)}
-      >
-        <option value="" disabled>
-            Choose a time to meet!
-        </option>
-        <option value={"null"} >All times</option>
-        <option value={Avails.CURRENT_TIME} >Available right now (PST)</option>
-        <option value={Avails.SELECTING_HOUR} >Select an hour</option>
-      </select>
-      {filterTimeAvailValue === Avails.SELECTING_HOUR ?
-      <div>
-        <select
-            name="weekday"
-            value={filterTimeWeekday}
-            onChange={e => setFilterTimeWeekday(e.target.value)}
-        >
+  return <>
+    <div className={styles.mainContainer}>
+      <div className={styles.filterContainer}>
+        {/* <h2>Connect and Swipe!</h2> */}
+        <div className={styles.filterRow}>
+          <select
+            name="swipesAvail"
+            value={filterSwipeAvailValue}
+            onChange={e => setFilterSwipeAvailValue(e.target.value)}
+          >
+            <option value="" disabled>Choose a swipe availability!</option>
+            <option value={"null"} >All</option>
+            {Object.keys(SwipeAvailLabel).map(e => 
+              <option value={e} >{SwipeAvailLabel[e]}</option>
+            )}
+          </select>
+          <select
+            name="timeAvail"
+            value={filterTimeAvailValue}
+            onChange={e => setFilterTimeAvailValue(e.target.value)}
+          >
             <option value="" disabled>
-                Select a weekday!
+              Choose a time to meet!
             </option>
-            <option value={"null"} >Any weekday</option>
-            {Object.entries(Avails.WEEKDAYS).map(([day, label]) => (
+            <option value={"null"} >All times</option>
+            <option value={Avails.CURRENT_TIME} >Available right now (PST)</option>
+            <option value={Avails.SELECTING_HOUR} >Select an hour</option>
+          </select>
+        </div>
+        {filterTimeAvailValue === Avails.SELECTING_HOUR &&
+          <div className={styles.filterRow}>
+            <p>Hour:</p>
+            <select
+              name="weekday"
+              value={filterTimeWeekday}
+              onChange={e => setFilterTimeWeekday(e.target.value)}
+            >
+              <option value="" disabled>
+                Select a weekday!
+              </option>
+              <option value={"null"} >Any weekday</option>
+              {Object.entries(Avails.WEEKDAYS).map(([day, label]) => (
                 <option key={day} value={label}>
                 {label}
                 </option>
-            ))}
-        </select>
-        <select
-            name="hour"
-            value={filterTimeHour}
-            onChange={e => setFilterTimeHour(e.target.value)}
-        >
-            <option value="" disabled>
+              ))}
+            </select>
+            <select
+              name="hour"
+              value={filterTimeHour}
+              onChange={e => setFilterTimeHour(e.target.value)}
+            >
+              <option value="" disabled>
                 Select an hour!
-            </option>
-            <option value={"null"} >Any hour</option>
-            {Object.entries(Avails.HOURS)
-            .sort(([a], [b]) => a.localeCompare(b))
-            .map(([k, v]) => (
+              </option>
+              <option value={"null"} >Any hour</option>
+              {Object.entries(Avails.HOURS)
+              .sort(([a], [b]) => a.localeCompare(b))
+              .map(([k, v]) => (
                 <option key={k} value={k}>
                 {v}
                 </option>
-            ))}
-        </select>
+              ))}
+            </select>
+          </div>
+        }
+        <button onClick={ reloadUsers }>Apply Filters</button>
       </div>
-      :
-      <div>
-        
-      </div>
-      }
       
-    </div>
-    
-    <button onClick={ reloadUsers }>Apply Filters</button>
-    <p>Loaded {profilesFiltered.length} profiles!</p>
-    <div className={styles.profileCardBox}>
-      {profilesFiltered.length > 0 ?
-        profilesFiltered.map(
-          profile => <div className={styles.profileCard}><ProfileCard key={profile.user_id} profile={profile} /></div>
-        )
-      : 
-        <p>No profiles loaded!</p>
-      }
-    </div>
+      <div className={styles.profilesContainer}>
+        <p>Loaded {profilesFiltered.length} profiles!</p>
+        {profilesFiltered.length > 0 ?
+          profilesFiltered.map(
+            profile => <ProfileCard key={profile.user_id} profile={profile} />
+          )
+        : 
+          <p>No profiles loaded!</p>
+        }
+      </div>
 
-  </>)
+    </div>
+  </>
 
 }
 

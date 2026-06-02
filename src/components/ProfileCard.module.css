@@ -1,4 +1,35 @@
-.expandedInfo{
+.expandedInfo {
   display: flex;
   gap: 40px;
+}
+.profileCard {
+  border: 1px solid var(--color-text);
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+  flex-wrap: wrap;
+
+  gap: 20px;
+  padding: 20px;
+
+  * {
+    margin: 0;
+  }
+}
+
+.contentBlock {
+  background-color: aquamarine;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.nameContainer {
+  display: flex;
+  flex-direction: column;
 }

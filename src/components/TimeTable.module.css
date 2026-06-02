@@ -1,0 +1,31 @@
+
+.timeGrid {
+  display: grid;
+  grid-template-columns: 100px repeat(7, 70px);
+  grid-auto-rows: 30px;
+  align-items: center;
+}
+
+.headerCell {
+  font-weight: bold;
+  text-align: center;
+}
+
+.timeLabel {
+  text-align: right;
+  padding-right: 10px;
+}
+
+.timeCell {
+  width: 70px;
+  height: 30px;
+  border: 1px solid black;
+  cursor: pointer;
+
+  /* Not available */
+  background-color: #efa49e; /*e79690*/
+
+  &.available {
+    background-color: #adeeb0; /*8bd490*/
+  }
+}

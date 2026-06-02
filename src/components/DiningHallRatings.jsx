@@ -51,6 +51,7 @@ function DiningHallRatings({ locationPref, setLocationPref}) {
     <div className={styles.diningHallsContainer}>
       {Object.keys(locations).map(loc => (
         <DiningHall
+          key={loc}
           rating={locationPref[loc]}
           onRate={(val) => setLocationPref(prev => {
             const newPref = {...prev}

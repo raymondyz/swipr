@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react"
-import "./App.css"
-import "./global.css"
 import { Pages } from "./constants/pages"
 import LoginPage from "./pages/LoginPage"
 import HomePage from "./pages/HomePage"
@@ -8,6 +6,8 @@ import SignupPage from "./pages/SignupPage"
 
 import { logout } from "./utils/api/authApi.js"
 import { getUserByToken } from "./utils/api/userApi.js"
+
+import "./global.css"
 
 
 function App() {

@@ -55,8 +55,6 @@ export function filterUsers(data, filters) {
                     targetIndexHour++;
                 }
             }
-            console.log(Object.entries(Avails.HOURS).sort(([a], [b]) => a.localeCompare(b)));
-            console.log(weekday, hour, targetIndexWeekday, targetIndexHour);
             newData = newData.filter(n => {
 
                 const avail = n["availability"];

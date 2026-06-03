@@ -44,12 +44,18 @@ function ProfileCard({ profile, setPanel, setParams }) {
             </div>
           </div>
         </div>
-        <button
-          className={styles.messageButton}
-          onClick={handleMessage}
-        >
-          Message
-        </button>
+        <div className={styles.headerGroup}>
+          <button
+            className={styles.messageButton}
+            onClick={handleMessage}
+          >
+            Message
+          </button>
+          <img
+            className={clsx(styles.dropdownIcon, expanded || styles.rotated)}
+            src="src/assets/images/dropdown-icon.svg"
+          />
+        </div>
       </div>
 
       {expanded && (

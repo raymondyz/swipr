@@ -41,6 +41,16 @@
     align-items: flex-start;
     gap: 5px;
   }
+
+  .dropdownIcon {
+    height: 30px;
+    width: 30px;
+    object-fit: contain;
+
+    &.rotated {
+      transform: rotate(90deg);
+    }
+  }
 }
 
 .contentContainer {

@@ -150,7 +150,6 @@ function VerificationPanel({ setPage, auth: {user, setUser} }) {
     setError("")
     try {
       await validateVerificationCode(user.email, code)
-      console.log("Verification successful")
       setPage(Pages.HOME)
     }
     catch (err) {

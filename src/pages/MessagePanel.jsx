@@ -20,8 +20,6 @@ function MessageTopbar({ chatUserId }) {
     fetchProfile();
   }, [chatUser]);
 
-  console.log(chatUser)
-
   return <>
     <div className={styles.topbar}>
       <p className={styles.name}>{chatUser?.users?.name}</p>

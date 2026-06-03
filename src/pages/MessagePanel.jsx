@@ -102,13 +102,13 @@ function MessagePanel({ params, setParams, setPage, auth: {user, setUser} }) {
     fetchChats();
   }, [])
 
-  // Fetch message every 5 seconds
+  // Fetch message every second
   useEffect(() => {
     if (!chatUserId) return;
 
     const id = setInterval(() => {
       fetchMessages();
-    }, 5 * 1000);
+    }, 1 * 1000);
 
     return () => {clearInterval(id)};
   }, [chatUserId]);

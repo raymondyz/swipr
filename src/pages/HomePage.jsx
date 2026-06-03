@@ -14,6 +14,7 @@ import styles from "./HomePage.module.css"
 
 function HomePage({ setPage, auth: {user, setUser}  }) {
   const [panel, setPanel] = useState(Panels.HOME);
+  const [panelParams, setPanelParams] = useState(null);
 
   function handleLogout() {
     logout()
@@ -25,6 +26,13 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
   useEffect(() => {
     if (!user) setPage(Pages.LOGIN);
   }, [user]);
+
+  const panelProps = {
+    params: panelParams,
+    setParams: setPanelParams,
+    setPanel,
+    auth: { user, setUser }
+  }
 
   return (
     <div className={styles.homePage}>
@@ -43,10 +51,10 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
         </div>
       </div>
       <div className={styles.panelContainer}>
-        {panel === Panels.PROFILE && <ProfilePanel setPanel={setPanel} auth={{ user, setUser }} />}
-        {panel === Panels.SEARCH && <SearchPanel setPanel={setPanel} auth={{ user, setUser }} />}
-        {panel === Panels.DINING && <DiningHallPanel setPanel={setPanel} auth={{ user, setUser }} />}
-        {panel === Panels.MESSAGE && <MessagePanel setPanel={setPanel} auth={{ user, setUser }} />}
+        {panel === Panels.PROFILE && <ProfilePanel {...panelProps} />}
+        {panel === Panels.SEARCH && <SearchPanel {...panelProps} />}
+        {panel === Panels.DINING && <DiningHallPanel {...panelProps} />}
+        {panel === Panels.MESSAGE && <MessagePanel {...panelProps} />}
       </div>
     </div>
   )

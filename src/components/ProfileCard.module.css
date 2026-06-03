@@ -19,12 +19,20 @@
   flex-direction: row;
   gap: 20px;
   align-items: center;
+  justify-content: space-between;
 
   img {
     height: 60px;
     width: auto;
 
     border-radius: 10px;
+  }
+
+  .headerGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
   }
 
   .nameContainer {

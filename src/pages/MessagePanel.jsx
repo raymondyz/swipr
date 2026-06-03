@@ -72,10 +72,15 @@ function MessageBar({ chatUserId, fetchMessages }) {
 }
 
 
-function MessagePanel({ setPage, auth: {user, setUser} }) {
+function MessagePanel({ params, setParams, setPage, auth: {user, setUser} }) {
   const [data, setData] = useState(null);
-  const [chatUserId, setChatUserId] = useState("");
+  const [chatUserId, setChatUserId] = useState(params?.chatId ?? null);
   const [chatList, setChatList] = useState([]);
+  
+  // Clear params
+  useEffect(() => {
+    if (params) setParams(null);
+  }, []);
 
   async function fetchMessages() {
     const messages = await getMessages(chatUserId)
@@ -115,7 +120,7 @@ function MessagePanel({ setPage, auth: {user, setUser} }) {
         setChatUserId={setChatUserId}
         chatList={chatList}
       />
-      {chatUserId !== "" &&
+      {chatUserId &&
         <div className={styles.chatWindow} >
           <MessageHistory data={data} user={user} />
           <MessageBar

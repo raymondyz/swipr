@@ -7,7 +7,7 @@ import { filterUsers } from "../utils/dataFilter";
 
 import styles from "./SearchPanel.module.css";
 
-function SearchPanel({ setPanel, auth: {user, setUser} }) {
+function SearchPanel({ setPanel, setParams, auth: {user, setUser} }) {
   const [profiles, setProfiles] = useState(null)
   const [profilesFiltered, setProfilesFiltered] = useState(null)
 
@@ -48,7 +48,6 @@ function SearchPanel({ setPanel, auth: {user, setUser} }) {
   return <>
     <div className={styles.mainContainer}>
       <div className={styles.filterContainer}>
-        {/* <h2>Connect and Swipe!</h2> */}
         <div className={styles.filterRow}>
           <select
             name="swipesAvail"
@@ -58,7 +57,7 @@ function SearchPanel({ setPanel, auth: {user, setUser} }) {
             <option value="" disabled>Choose a swipe availability!</option>
             <option value={"null"} >All</option>
             {Object.keys(SwipeAvailLabel).map(e => 
-              <option value={e} >{SwipeAvailLabel[e]}</option>
+              <option key={e} value={e} >{SwipeAvailLabel[e]}</option>
             )}
           </select>
           <select
@@ -117,9 +116,14 @@ function SearchPanel({ setPanel, auth: {user, setUser} }) {
       <div className={styles.profilesContainer}>
         <p>Loaded {profilesFiltered.length} profiles!</p>
         {profilesFiltered.length > 0 ?
-          profilesFiltered.map(
-            profile => <ProfileCard key={profile.user_id} profile={profile} />
-          )
+          profilesFiltered.map(profile => (
+            <ProfileCard
+              key={profile.user_id}
+              profile={profile}
+              setPanel={setPanel}
+              setParams={setParams}
+            />
+          ))
         : 
           <p>No profiles loaded!</p>
         }

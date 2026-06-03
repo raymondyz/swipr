@@ -14,7 +14,7 @@
   flex-direction: column;
   justify-content: stretch;
 
-  overflow: scroll;
+  overflow-y: scroll;
 
   background-color: var(--color-secondary-dull);
 
@@ -66,13 +66,14 @@
   width: 100%;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 10px;
 
   box-sizing: border-box;
   padding: 10px;
 
-  overflow: scroll;
+  overflow-y: scroll;
+  
 }
 
 .messageBar {

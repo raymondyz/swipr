@@ -1,13 +1,34 @@
 import { useState, useEffect } from "react"
 import { Pages } from "../constants/pages"
 import { validateLogin } from "../utils/api/authApi"
-import { getUserByEmail } from "../utils/api/userApi"
+import { getUserByEmail, getProfile } from "../utils/api/userApi"
 import { getMessages, sendMessage, getAllChatUsers } from "../utils/api/messageApi.js"
 import TextMessage from "../components/TextMessage.jsx"
 
 import styles from "./MessagePanel.module.css"
 import clsx from "clsx"
 
+function MessageTopbar({ chatUserId }) {
+  const [chatUser, setChatUser] = useState(null);
+
+  // Fetch chatUser profile
+  useEffect(() => {
+    async function fetchProfile() {
+      setChatUser(await getProfile(chatUserId));
+    }
+    
+    fetchProfile();
+  }, [chatUser]);
+
+  console.log(chatUser)
+
+  return <>
+    <div className={styles.topbar}>
+      <p className={styles.name}>{chatUser?.users?.name}</p>
+      <p className={styles.username}>{chatUser?.users?.username}</p>
+    </div>
+  </>
+}
 
 function MessageSidebar({ chatUserId, setChatUserId, chatList }) {
   return <>
@@ -122,6 +143,7 @@ function MessagePanel({ params, setParams, setPage, auth: {user, setUser} }) {
       />
       {chatUserId &&
         <div className={styles.chatWindow} >
+          <MessageTopbar chatUserId={chatUserId} />
           <MessageHistory data={data} user={user} />
           <MessageBar
             chatUserId={chatUserId}

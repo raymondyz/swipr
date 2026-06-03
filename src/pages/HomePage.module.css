@@ -29,6 +29,11 @@
     max-width: 100%;
     object-fit: contain;
   }
+
+  .email {
+    color: var(--color-text-contrast);
+    font-weight: bold;
+  }
 }
 
 .navContainer {

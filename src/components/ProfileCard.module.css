@@ -50,10 +50,10 @@
   flex-direction: column;
 
   gap: 20px;
- 
+  
   &.timeTable {
-    flex-grow: 1;
     min-width: 450;
+    width: 600px;
   }
 }
 

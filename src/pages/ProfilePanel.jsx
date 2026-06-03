@@ -99,7 +99,7 @@ function ProfilePanel({ setPanel, auth: {user, setUser} }){
     <div className={styles.mainContainer}>
       <div className={styles.hBlock}>
         <div className={styles.contentBlock}>
-          <h4>Location Preferences:</h4>
+          <h2>Location Preferences:</h2>
           <DiningHallRatings
             locationPref={locationPref}
             setLocationPref={setLocationPref}
@@ -107,14 +107,14 @@ function ProfilePanel({ setPanel, auth: {user, setUser} }){
         </div>
         <div className={styles.vBlock}>
           <div className={clsx(styles.contentBlock, styles.timePref)}>
-            <h4>Time Availability:</h4>
+            <h2>Time Availability:</h2>
             <TimeTable
               availability={timePref}
               updateAvailability={updateAvailability}
             />
           </div>
           <div className={styles.contentBlock}>
-            <label htmlFor="swipe-status"><h4>Swipe Status:</h4></label>
+            <label htmlFor="swipe-status"><h2>Swipe Status:</h2></label>
             <select
               className={styles.credentialsBox}
               id="swipe-status"
@@ -127,7 +127,7 @@ function ProfilePanel({ setPanel, auth: {user, setUser} }){
             </select>
           </div>
           <div className={styles.contentBlock}>
-            <label htmlFor="notes"><h4>Notes:</h4></label>
+            <label htmlFor="notes"><h2>Notes:</h2></label>
             <input
               className={styles.credentialsBox}
               id="notes"

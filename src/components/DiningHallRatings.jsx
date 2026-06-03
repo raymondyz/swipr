@@ -6,14 +6,15 @@ import clsx from "clsx"
 function DiningHall({ rating, onRate, locationImgPath, locationName, condensed }) {
   return <>
     <div className={clsx(styles.diningHallRating, condensed && styles.condensed)}>
-      {condensed ? (
+      {/* {condensed ? (
         <h3 className={styles.diningHallName}>{locationName}</h3>
       ) : (
         <img
           src={locationImgPath}
           alt={locationName}
         />
-      )}
+      )} */}
+      <h3 className={styles.diningHallName}>{locationName}</h3>
       <StarRating
         rating={rating}
         onRate={onRate}

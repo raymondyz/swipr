@@ -25,3 +25,6 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+      env:
+        VITE_BACKEND_API_URL: ${{ secrets.VITE_BACKEND_API_URL }}
+

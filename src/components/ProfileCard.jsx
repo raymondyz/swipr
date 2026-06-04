@@ -32,7 +32,7 @@ function ProfileCard({ profile, setPanel, setParams }) {
     >
       <div className={styles.header} >
         <div className={styles.headerGroup}>
-          <img src="src/assets/images/animepfp.jpg" alt="pfp" />
+          <img src="/swipr/assets/images/animepfp.jpg" alt="pfp" />
           <div className={styles.nameContainer}>
             <h2>{name}</h2>
             <div className={clsx(
@@ -44,12 +44,18 @@ function ProfileCard({ profile, setPanel, setParams }) {
             </div>
           </div>
         </div>
-        <button
-          className={styles.messageButton}
-          onClick={handleMessage}
-        >
-          Message
-        </button>
+        <div className={styles.headerGroup}>
+          <button
+            className={styles.messageButton}
+            onClick={handleMessage}
+          >
+            Message
+          </button>
+          <img
+            className={clsx(styles.dropdownIcon, expanded || styles.rotated)}
+            src="/swipr/assets/images/dropdown-icon.svg"
+          />
+        </div>
       </div>
 
       {expanded && (

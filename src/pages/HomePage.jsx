@@ -37,17 +37,19 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
   return (
     <div className={styles.homePage}>
       <div className={styles.navbar}>
-        <img src="src/assets/images/swiprLogoWhite.svg" alt="Logo"></img>
-        <p>{user?.email}</p>
+        <img src="/swipr/assets/images/swiprLogoWhite.svg" alt="Logo"></img>
+        <p className={styles.email}>{user?.email}</p>
         <div className={styles.navContainer}>
-          <button onClick={() => setPanel(Panels.PROFILE)} type="submit">Profile</button>
-          <button onClick={() => setPanel(Panels.SETTINGS)} type="submit">Settings</button>
-          <button onClick={() => setPanel(Panels.SEARCH)} type="submit">Search</button>
-          <button onClick={() => setPanel(Panels.HOME)} type="submit">Home</button>
-          <button onClick={() => setPanel(Panels.DINING)} type="submit">Dining Halls</button>
-          <button onClick={() => setPanel(Panels.HOME)} type="submit">Groups</button>
-          <button onClick={() => setPanel(Panels.MESSAGE)} type="submit">Messages</button>
-          <button onClick={() => handleLogout()} type="submit">Logout</button>
+          <div className={styles.navButtonContainer}>
+            <button onClick={() => setPanel(Panels.SEARCH)} type="submit">Search</button>
+            <button onClick={() => setPanel(Panels.DINING)} type="submit">Dining Halls</button>
+            <button onClick={() => setPanel(Panels.MESSAGE)} type="submit">Messages</button>
+            <button onClick={() => setPanel(Panels.PROFILE)} type="submit">Profile</button>
+          </div>
+          <div className={styles.navButtonContainer}>
+            <button onClick={() => setPanel(Panels.SETTINGS)} type="submit">Settings</button>
+            <button className={styles.logoutButton} onClick={() => handleLogout()} type="submit">Logout</button>
+          </div>
         </div>
       </div>
       <div className={styles.panelContainer}>

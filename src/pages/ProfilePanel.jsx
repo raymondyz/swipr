@@ -131,7 +131,7 @@ function ProfilePanel({ setPanel, auth: {user, setUser} }){
             <input
               className={styles.credentialsBox}
               id="notes"
-              value={notes}
+              value={notes ?? ""}
               onChange={(e) => setNotes(e.target.value)}
             />
           </div>

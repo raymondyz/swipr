@@ -110,7 +110,7 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
           onClick={() => setShowPassword(prev => !prev)}
         >
           <img
-            src={`src/assets/images/${showPassword ? "eye-open" : "eye-hidden"}.png`}
+            src={`/swipr/assets/images/${showPassword ? "eye-open" : "eye-hidden"}.png`}
           />
         </button>
         <button type="submit">Signup</button>
@@ -150,7 +150,6 @@ function VerificationPanel({ setPage, auth: {user, setUser} }) {
     setError("")
     try {
       await validateVerificationCode(user.email, code)
-      console.log("Verification successful")
       setPage(Pages.HOME)
     }
     catch (err) {
@@ -203,7 +202,7 @@ function SignupPage({ setPage, auth: {user, setUser} }) {
   return (
     <div className={styles.loginPage}>
       <div className={styles.loginCard}>
-        <img src="src/assets/images/swiprLogo.svg" alt="Logo"></img>
+        <img src="/swipr/assets/images/swiprLogo.svg" alt="Logo"></img>
           <h2>Sign Up to Start Swiping!</h2>
           
           {panel === Panels.REGISTRATION && <RegistrationPanel setPanel={setPanel} auth={{user, setUser}} />}

@@ -8,22 +8,21 @@
 
   p {
     margin: 0;
+    overflow-wrap: break-word;
   }
 }
 
 /* For messages received from other person */
 .messageLine {
   justify-content: flex-start;
-  margin-right: 80px;
   .messageBubble {
+    max-width: 90%;
     background-color: var(--color-info-gray);
   }
 }
 
 /* For messages sent by self (note: this is a subclass of .messageLine)*/
-.ownMessage.messageLine {
-  margin-left: 80px;
-  margin-right: 0px;
+.messageLine.ownMessage {
   justify-content: flex-end;
 
   .messageBubble {

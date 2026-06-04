@@ -31,7 +31,7 @@ function ProfileCard({ profile, setPanel, setParams }) {
       role="button"
     >
       <div className={styles.header} >
-        <div className={styles.headerGroup}>
+        <div className={clsx(styles.headerGroup, styles.nameGroup)}>
           <img src="/swipr/assets/images/animepfp.jpg" alt="pfp" />
           <div className={styles.nameContainer}>
             <h2>{name}</h2>

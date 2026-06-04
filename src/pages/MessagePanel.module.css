@@ -20,7 +20,8 @@
 }
 
 .sidebarContainer {
-  width: 400px;
+  min-width: 150px;
+  width: 300px;
   height: 100%;
 
   display: flex;
@@ -28,6 +29,7 @@
   justify-content: stretch;
 
   overflow-y: auto;
+  overflow-x: hidden;
 
   background-color: var(--color-secondary-select);
   border-left: 2px solid var(--color-secondary-dull);
@@ -69,6 +71,7 @@
 .chatWindow {
   height: 100%;
   width: 100%;
+  min-width: 300px;
 
   display: flex;
   flex-direction: column;

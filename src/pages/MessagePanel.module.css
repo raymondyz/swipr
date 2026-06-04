@@ -27,7 +27,7 @@
   flex-direction: column;
   justify-content: stretch;
 
-  overflow-y: scroll;
+  overflow-y: auto;
 
   background-color: var(--color-secondary-select);
   border-left: 2px solid var(--color-secondary-dull);
@@ -87,7 +87,7 @@
   box-sizing: border-box;
   padding: 10px;
 
-  overflow-y: scroll;
+  overflow-y: auto;
   
 }
 

@@ -39,9 +39,9 @@ function DiningHallPanel({setPanel}){
     >
       <h2>Epicuria at Covel</h2>
       {expanded[1] && (
-        <div><p>Looking for one of the healthiest college restaurants in the nation? You’ve found it! Bruin Plate is a creative, honest and responsible eatery that provides seasonal, innovative and sustainable cuisine with mouth-watering results.</p>
-        <p>Popular items include roasted Brussel sprouts, arugula topped flatbread, roasted cauliflower soup, yam tacos, bison burger stackers, lemon cod and chipotle chicken bowls, to name a few. Even the desserts are healthy! Bruin Plate’s large floor-to-ceiling windows offer gorgeous views of campus and lots of natural light. Located in the heart of large volumes of student traffic between the UCLA campus and the residential community, Bruin Plate makes the healthy choice an easy choice.</p>
-        <p>Bruin Plate inspires mindful-eating through healthy, nutritious and locally procured ingredients. It’s exciting, fresh, wholesome and nutritionally balanced dishes for a diverse community.</p>
+        <div><p>A Mediterranean marketplace guided by the philosophy of Epicureanism: the idea that the pursuit of pleasure and comfort in relation to our attitude to food and how we prepare it can be found by living a life of simplicity.</p>
+        <p>Fresh California products inspired by the cuisines of Cyprus, France, Greece, Israel, Italy, Lebanon, Spain, Turkey and many other Mediterranean nations, Epicuria at Covel infuses fresh, local, sustainable meats and in-season vegetables into expertly crafted meals. Menus change seasonally. With its warm hospitality, lively ambiance and décor inspired by classic Mediterranean colors and textiles, Epicuria is a great place to meet with friends for a meal or a late night study sessions. Features cozy seating, modern lighting and ample charging stations for your devices.</p>
+        <p>Epicuria at Covel is located on the lower level of Covel Commons.</p>
         </div>
       )}
     </div>

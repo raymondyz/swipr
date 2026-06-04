@@ -26,6 +26,7 @@ export async function request(path, body) {
     data = await res.json()
   }
   catch (err) {
+    console.log(err)
     throw new Error("Network or server error");
   }
 

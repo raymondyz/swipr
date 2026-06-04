@@ -3,6 +3,7 @@ import { Pages } from "../constants/pages"
 import { validateSignupEmail, validateSignupPassword, passwordRequirements } from "../utils/authValidation"
 import { registerUser, sendVerificationCode, validateVerificationCode } from "../utils/api/authApi"
 import { getUserByEmail } from "../utils/api/userApi"
+import { EyeToggleButton } from "../components/eyeToggleButton.jsx"
 
 import styles from "./LoginPage.module.css"
 
@@ -104,15 +105,7 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
           type={showPassword ? "text" : "password"}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <button
-          className={styles.hideToggle}
-          type="button"
-          onClick={() => setShowPassword(prev => !prev)}
-        >
-          <img
-            src={`/swipr/assets/images/${showPassword ? "eye-open" : "eye-hidden"}.png`}
-          />
-        </button>
+        <EyeToggleButton showPassword={showPassword} setShowPassword={setShowPassword} styles={styles} />
         <button type="submit">Signup</button>
       </div>
     </form>

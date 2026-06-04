@@ -18,6 +18,10 @@
   border-radius: 1em;
 }
 
+.filterRow{
+  background-color: var(--color-secondary);
+}
+
 .mainContainer {
   width: 100%;
   height: 100%;

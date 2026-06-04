@@ -19,7 +19,11 @@
 }
 
 .filterRow{
-  background-color: var(--color-secondary);
+  background-color: var(--color-tertiary);
+
+  select, select:hover, option {
+    background-color: var(--color-accent);
+  }
 }
 
 .mainContainer {
@@ -31,7 +35,7 @@
 }
 
 .filterContainer {
-  background-color: var(--color-secondary);
+  background-color: var(--color-tertiary);
   display: flex;
   flex-direction: column;
   align-items: center;

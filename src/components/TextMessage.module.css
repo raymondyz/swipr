@@ -4,7 +4,6 @@
 
 .messageBubble {
   border-radius: 15px;
-
   padding: 10px;
 
   p {
@@ -15,14 +14,16 @@
 /* For messages received from other person */
 .messageLine {
   justify-content: flex-start;
-
+  margin-right: 80px;
   .messageBubble {
     background-color: var(--color-info-gray);
   }
 }
 
-/* For messages sent by self */
+/* For messages sent by self (note: this is a subclass of .messageLine)*/
 .ownMessage.messageLine {
+  margin-left: 80px;
+  margin-right: 0px;
   justify-content: flex-end;
 
   .messageBubble {

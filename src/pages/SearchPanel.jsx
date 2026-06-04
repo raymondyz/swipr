@@ -53,6 +53,7 @@ function SearchPanel({ setPanel, setParams, auth: {user, setUser} }) {
             name="swipesAvail"
             value={filterSwipeAvailValue}
             onChange={e => setFilterSwipeAvailValue(e.target.value)}
+            style={{backgroundColor: "var(--color-accent)"}}
           >
             <option value="" disabled>Choose a swipe availability!</option>
             <option value={"null"} >All</option>
@@ -64,6 +65,7 @@ function SearchPanel({ setPanel, setParams, auth: {user, setUser} }) {
             name="timeAvail"
             value={filterTimeAvailValue}
             onChange={e => setFilterTimeAvailValue(e.target.value)}
+            style={{backgroundColor: "var(--color-accent)"}}
           >
             <option value="" disabled>
               Choose a time to meet!

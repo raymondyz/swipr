@@ -33,8 +33,20 @@ function RegistrationPanel({ setPanel, auth: {user, setUser} }) {
       return
     }
 
+    if (name.length > 30) {
+      setError("Name is too long! Max 30 characters.")
+      setIsLoading(false)
+      return
+    }
+
     if (username == "") {
       setError("Username cannot be blank!")
+      setIsLoading(false)
+      return
+    }
+
+    if (username.length > 30){
+      setError("Username is too long! Max 30 characters.")
       setIsLoading(false)
       return
     }

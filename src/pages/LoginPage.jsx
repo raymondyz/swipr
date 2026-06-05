@@ -46,7 +46,7 @@ function LoginPage({ setPage, auth: {user, setUser} }) {
   return (
     <div className={styles.loginPage}>
       <div className={styles.loginCard}>
-        <img src="/swipr/assets/images/swiprLogo.svg" alt="Logo"></img>
+        <img src="/assets/images/swiprLogo.svg" alt="Logo"></img>
         <h2>Login to Start Swiping!</h2>
         
         <form onSubmit={handleLogin}>

@@ -6,7 +6,7 @@ export const EyeToggleButton = ({showPassword,setShowPassword,styles}) => {
             type="button"
             onClick={() => setShowPassword(prev => !prev)}>
             <img
-              src={`/swipr/assets/images/${showPassword ? "eye-open" : "eye-hidden"}.png`}
+              src={`/assets/images/${showPassword ? "eye-open" : "eye-hidden"}.png`}
             />
           </button>);
 }

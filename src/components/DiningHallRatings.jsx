@@ -39,17 +39,17 @@ const locations = Object.freeze({
 })
 
 const locImgPaths = Object.freeze({
-  bcafe: "/swipr/assets/images/bcafe.png",
-  bplate: "/swipr/assets/images/bplate.png",
-  cafe1919: "/swipr/assets/images/cafe1919.png",
-  deneve: "/swipr/assets/images/deneve.png",
-  epicuria: "/swipr/assets/images/epicuria.png",
-  feast: "/swipr/assets/images/feast.png",
-  thedrey: "/swipr/assets/images/thedrey.svg",
-  thestudy: "/swipr/assets/images/thestudy.png",
-  foodtrucks: "/swipr/assets/images/foodtrucks.svg",
-  rendevous: "/swipr/assets/images/rendevous.svg",
-  bruinbowl: "/swipr/assets/images/bruinbowl.svg"
+  bcafe: "/assets/images/bcafe.png",
+  bplate: "/assets/images/bplate.png",
+  cafe1919: "/assets/images/cafe1919.png",
+  deneve: "/assets/images/deneve.png",
+  epicuria: "/assets/images/epicuria.png",
+  feast: "/assets/images/feast.png",
+  thedrey: "/assets/images/thedrey.svg",
+  thestudy: "/assets/images/thestudy.png",
+  foodtrucks: "/assets/images/foodtrucks.svg",
+  rendevous: "/assets/images/rendevous.svg",
+  bruinbowl: "/assets/images/bruinbowl.svg"
 })
 
 function DiningHallRatings({ locationPref, setLocationPref = null, condensed = false}) {

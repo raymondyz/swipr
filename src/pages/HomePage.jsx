@@ -38,7 +38,7 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
   return (
     <div className={styles.homePage}>
       <div className={styles.navbar}>
-        <img src="/swipr/assets/images/swiprLogoWhite.svg" alt="Logo"></img>
+        <img src="/assets/images/swiprLogoWhite.svg" alt="Logo"></img>
         <p className={styles.email}>{user?.email}</p>
         <div className={styles.navContainer}>
           <div className={styles.navButtonContainer}>

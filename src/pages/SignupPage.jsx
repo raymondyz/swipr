@@ -207,7 +207,7 @@ function SignupPage({ setPage, auth: {user, setUser} }) {
   return (
     <div className={styles.loginPage}>
       <div className={styles.loginCard}>
-        <img src="/swipr/assets/images/swiprLogo.svg" alt="Logo"></img>
+        <img src="/assets/images/swiprLogo.svg" alt="Logo"></img>
           <h2>Sign Up to Start Swiping!</h2>
           
           {panel === Panels.REGISTRATION && <div className={styles.loginText}><RegistrationPanel setPanel={setPanel} auth={{user, setUser}} /></div>}

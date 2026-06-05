@@ -88,6 +88,33 @@ function SettingsPanel({ auth: { user, setUser } }) {
 
   return <>
     <div className={styles.mainContainer}>
+      <div className={clsx(styles.section, styles.updateInfo)}>
+        <h2>Update Info:</h2>
+
+        <div className={styles.inputGroup}>
+          <label htmlFor="name"><p>Name:</p></label>
+          <input
+            id="name"
+            onChange={e => setNewName(e.target.value)}
+            value={newName}
+          />
+        </div>
+
+        <div className={styles.inputGroup}>
+          <label htmlFor="username"><p>Username:</p></label>
+          <input
+            id="username"
+            onChange={e => setNewUsername(e.target.value)}
+            value={newUsername}
+          />
+        </div>
+        
+        <button onClick={handleUpdateInfo}>Update Info</button>
+
+        {infoError && <p className={styles.error}>{infoError}</p>}
+        {infoSuccess && <p className={styles.success}>{infoSuccess}</p>}
+
+      </div>
       <div className={clsx(styles.section, styles.updatePassword)}>
         <h2>Update Password:</h2>
         <div className={styles.inputGroup}>
@@ -119,36 +146,8 @@ function SettingsPanel({ auth: { user, setUser } }) {
 
         <button onClick={handleUpdatePassword}>Change Password</button>
 
-        {passwordError && <p>{passwordError}</p>}
-        {passwordSuccess && <p>{passwordSuccess}</p>}
-      </div>
-
-      <div className={clsx(styles.section, styles.updateInfo)}>
-        <h2>Update Info:</h2>
-
-        <div className={styles.inputGroup}>
-          <label htmlFor="name"><p>Name:</p></label>
-          <input
-            id="name"
-            onChange={e => setNewName(e.target.value)}
-            value={newName}
-          />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label htmlFor="username"><p>Username:</p></label>
-          <input
-            id="username"
-            onChange={e => setNewUsername(e.target.value)}
-            value={newUsername}
-          />
-        </div>
-        
-        <button onClick={handleUpdateInfo}>Update Info</button>
-
-        {infoError && <p>{infoError}</p>}
-        {infoSuccess && <p>{infoSuccess}</p>}
-
+        {passwordError && <p className={styles.error}>{passwordError}</p>}
+        {passwordSuccess && <p className={styles.success}>{passwordSuccess}</p>}
       </div>
     </div>
   </>

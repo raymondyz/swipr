@@ -1,0 +1,30 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px;
+
+  * {
+    margin: 0;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 30px;
+  gap: 20px;
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  input {
+    background-color: var(--color-accent-dull);
+
+    &:hover {
+      background-color: var(--color-accent-select);
+    }
+  }
+}

@@ -19,5 +19,7 @@ export async function sendVerificationCode(email) {
 }
 
 export async function validateVerificationCode(email, code) {
-  return request("/auth/verify-code", { email, code })
+  const data = await request("/auth/verify-code", { email, code })
+  localStorage.setItem("token", data.token);
+  return data.user
 }

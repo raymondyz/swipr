@@ -12,4 +12,4 @@ export function validateSignupPassword(password) {
   return regex.test(password)
 }
 
-export const passwordRequirements = "Password must be at least 8 characters and contain at least one letter and number"
+export const passwordRequirements = "Password must be at least 8 characters and contain at least 1 letter and number"

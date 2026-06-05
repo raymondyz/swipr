@@ -19,3 +19,11 @@ export async function getProfile(userId) {
 export async function updateProfile(userId, updates) {
   return request("/profile/update", { userId, updates })
 }
+
+export async function updatePassword(oldPassword, newPassword) {
+  return request("/user/update-password", { oldPassword, newPassword })
+}
+
+export async function updateUserInfo({ name, username }) {
+  return request("/user/update-user-info", { name, username })
+}

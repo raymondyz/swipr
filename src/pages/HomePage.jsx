@@ -9,6 +9,7 @@ import ProfilePanel from "./ProfilePanel"
 import SearchPanel from "./SearchPanel"
 import DiningHallPanel from "./DiningHallPanel"
 import MessagePanel from "./MessagePanel"
+import SettingsPanel from "./SettingsPanel"
 
 import styles from "./HomePage.module.css"
 
@@ -57,6 +58,7 @@ function HomePage({ setPage, auth: {user, setUser}  }) {
         {panel === Panels.SEARCH && <SearchPanel {...panelProps} />}
         {panel === Panels.DINING && <DiningHallPanel {...panelProps} />}
         {panel === Panels.MESSAGE && <MessagePanel {...panelProps} />}
+        {panel === Panels.SETTINGS && <SettingsPanel {...panelProps} />}
       </div>
     </div>
   )
